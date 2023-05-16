@@ -40,11 +40,7 @@ class ReveiwsImageAdapter(
 //            .load("drawable/noodels.png")
 //            .into(holder.ivReview)
 
-        
         holder.ivReview.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.noodels))
-
-
-
     }
 
     // return the number of the items in the list
@@ -55,8 +51,5 @@ class ReveiwsImageAdapter(
     // Holds the views for adding it to image and text
     class ViewHolder(ReviewView: View) : RecyclerView.ViewHolder(ReviewView) {
         val ivReview: ImageView = ReviewView.findViewById(R.id.ivReviewImage)
-
-
-
     }
 }
