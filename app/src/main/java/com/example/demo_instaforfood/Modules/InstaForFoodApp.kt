@@ -1,4 +1,4 @@
-package com.example.demo_instaforfood
+package com.example.demo_instaforfood.Modules
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

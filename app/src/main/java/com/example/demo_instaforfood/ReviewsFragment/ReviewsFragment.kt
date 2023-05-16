@@ -1,4 +1,4 @@
-package com.example.demo_instaforfood.Fragments
+package com.example.demo_instaforfood.ReviewsFragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,17 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import androidx.paging.ExperimentalPagingApi
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.demo_instaforfood.Models.MenuItemRating
-import com.example.demo_instaforfood.Models.ReviewImage
 import com.example.demo_instaforfood.Paging.ReveiwsImagesPagingAdapter
 import com.example.demo_instaforfood.ViewModels.AppViewModel
 import com.example.demo_instaforfood.databinding.FragmentReviewsBinding
-import dagger.hilt.android.AndroidEntryPoint
-
-
 
 
 class ReviewsFragment : Fragment() {

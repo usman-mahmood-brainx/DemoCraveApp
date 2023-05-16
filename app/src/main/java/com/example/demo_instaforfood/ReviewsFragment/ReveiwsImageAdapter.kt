@@ -1,8 +1,6 @@
-package com.example.demo_instaforfood.Fragments
+package com.example.demo_instaforfood.ReviewsFragment
 
 import android.content.Context
-import android.content.res.Resources
-import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

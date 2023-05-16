@@ -1,12 +1,10 @@
 package com.example.demo_instaforfood
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.demo_instaforfood.Fragments.ReviewsFragment
+import com.example.demo_instaforfood.ReviewsFragment.ReviewsFragment
 
 private val NUM_TABS = 4
 
