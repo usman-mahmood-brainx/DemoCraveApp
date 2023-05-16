@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.demo_instaforfood.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 
 private val tabsArray = arrayOf(
     "Reviews",
@@ -12,6 +13,7 @@ private val tabsArray = arrayOf(
     "Cities"
 )
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding : ActivityMainBinding

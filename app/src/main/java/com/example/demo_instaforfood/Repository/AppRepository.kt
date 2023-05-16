@@ -8,12 +8,12 @@ import com.example.demo_instaforfood.Api.ReviewImageAPI
 import com.example.demo_instaforfood.Paging.ReviewImagesPagingSource
 import javax.inject.Inject
 
-@ExperimentalPagingApi
+
 class AppRepository @Inject constructor(
     private val reviewImagesAPI: ReviewImageAPI,
 ) {
 
-    fun getQuotes() = Pager(
+    fun getImages() = Pager(
         config = PagingConfig(pageSize = 20, maxSize = 100),
         pagingSourceFactory = { ReviewImagesPagingSource(reviewImagesAPI) }
     ).liveData

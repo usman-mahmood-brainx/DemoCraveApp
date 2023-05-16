@@ -5,16 +5,25 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
+import androidx.paging.ExperimentalPagingApi
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.demo_instaforfood.Models.MenuItemRating
 import com.example.demo_instaforfood.Models.ReviewImage
+import com.example.demo_instaforfood.Paging.ReveiwsImagesPagingAdapter
+import com.example.demo_instaforfood.ViewModels.AppViewModel
 import com.example.demo_instaforfood.databinding.FragmentReviewsBinding
+import dagger.hilt.android.AndroidEntryPoint
+
+
 
 
 class ReviewsFragment : Fragment() {
 
     lateinit var reviewsBinding: FragmentReviewsBinding
+    lateinit var appViewModel: AppViewModel
+    lateinit var adapter: ReveiwsImagesPagingAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -52,11 +61,17 @@ class ReviewsFragment : Fragment() {
 //        val dpWidth = displayMetrics.widthPixels / displayMetrics.density
 
 
+        appViewModel = ViewModelProvider(requireActivity()).get(AppViewModel::class.java)
+        adapter = ReveiwsImagesPagingAdapter()
 
-        val reviewImagesAdapter  = ReveiwsImageAdapter(requireContext(),imagesList)
+//        val reviewImagesAdapter  = ReveiwsImageAdapter(requireContext(),imagesList)
         reviewsBinding.rvReviewImages.layoutManager = GridLayoutManager(requireContext(),3)
 
-        reviewsBinding.rvReviewImages.adapter = reviewImagesAdapter
+        reviewsBinding.rvReviewImages.adapter = adapter
+
+        appViewModel.list.observe(requireActivity(),{
+            adapter.submitData(lifecycle,it)
+        })
 
 
 
