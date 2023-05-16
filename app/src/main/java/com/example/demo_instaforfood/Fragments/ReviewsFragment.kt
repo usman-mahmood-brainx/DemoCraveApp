@@ -30,7 +30,6 @@ class ReviewsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         reviewsBinding = FragmentReviewsBinding.inflate(inflater)
-//        inflater.inflate(R.layout.fragment_reviews, container, false)
 
         val menuRatinglist = listOf(
             MenuItemRating("+9",175),
@@ -40,40 +39,18 @@ class ReviewsFragment : Fragment() {
             MenuItemRating("1 to 5",24)
         )
 
-        val imagesList = listOf(
-            ReviewImage("drawable/noodels.png"),
-            ReviewImage("drawable/noodels.png"),
-            ReviewImage("drawable/noodels.png"),
-            ReviewImage("drawable/noodels.png"),
-            ReviewImage("drawable/noodels.png"),
-            ReviewImage("drawable/noodels.png"),
-            ReviewImage("drawable/noodels.png"),
-            ReviewImage("drawable/noodels.png"),
-
-        )
-
         val MenuRatingAdapter = MenuRatingAdapter(menuRatinglist)
         reviewsBinding.rvMenuRatings.layoutManager = LinearLayoutManager(requireContext())
         reviewsBinding.rvMenuRatings.adapter = MenuRatingAdapter
 
-//         To Get Screen Width
-//        val displayMetrics = getResources().displayMetrics
-//        val dpWidth = displayMetrics.widthPixels / displayMetrics.density
-
-
         appViewModel = ViewModelProvider(requireActivity()).get(AppViewModel::class.java)
         adapter = ReveiwsImagesPagingAdapter()
-
-//        val reviewImagesAdapter  = ReveiwsImageAdapter(requireContext(),imagesList)
         reviewsBinding.rvReviewImages.layoutManager = GridLayoutManager(requireContext(),3)
-
         reviewsBinding.rvReviewImages.adapter = adapter
-
+        
         appViewModel.list.observe(requireActivity(),{
             adapter.submitData(lifecycle,it)
         })
-
-
 
         return reviewsBinding.root
     }

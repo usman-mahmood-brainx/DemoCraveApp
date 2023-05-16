@@ -20,7 +20,6 @@ class RetrofitModule {
         return Retrofit.Builder().baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create()).build()
     }
-
     @Singleton
     @Provides
     fun getReviewImagesAPI(retrofit: Retrofit):ReviewImageAPI{
