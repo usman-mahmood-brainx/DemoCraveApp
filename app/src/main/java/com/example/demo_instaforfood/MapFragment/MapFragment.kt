@@ -12,18 +12,22 @@ import android.view.ViewGroup
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.demo_instaforfood.Models.Place
 import com.example.demo_instaforfood.R
+import com.example.demo_instaforfood.databinding.FragmentMapBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.maps.android.ui.IconGenerator
 
 
 class MapFragment : Fragment(){
-
+    lateinit var binding: FragmentMapBinding
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
 
     private val callback = OnMapReadyCallback { googleMap ->
         /**
@@ -36,7 +40,8 @@ class MapFragment : Fragment(){
         val boundsBuilder =  LatLngBounds.Builder()
         val iconGenerator = IconGenerator(requireContext())
         iconGenerator.setTextAppearance(R.style.myStyleTextMarker)
-        iconGenerator.setColor(ContextCompat.getColor(requireContext(),R.color.blue))
+//        iconGenerator.setColor(ContextCompat.getColor(requireContext(),R.color.blue))
+        iconGenerator.setBackground(ContextCompat.getDrawable(requireContext(),R.drawable.location_icon))
 
         val placesList = listOf(
             Place("Johny and Jugnu","Fast Food Chain",31.27,74.17),
@@ -67,7 +72,44 @@ class MapFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        return inflater.inflate(R.layout.fragment_map, container, false)
+        binding = FragmentMapBinding.inflate(inflater)
+
+        bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
+        bottomSheetBehavior.isFitToContents = false
+        bottomSheetBehavior.halfExpandedRatio = 0.6f
+        binding.ivMinimize.setOnClickListener{
+
+            if(bottomSheetBehavior.state != BottomSheetBehavior.STATE_HALF_EXPANDED)  {
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+            }
+            else{
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            }
+
+        }
+
+
+        val foodResultAdapter =  FoodResultAdapter(emptyList())
+        binding.rvFoodResult.layoutManager =LinearLayoutManager(requireContext())
+        binding.rvFoodResult.adapter = foodResultAdapter
+
+        
+        
+//        bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
+//        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+//
+//        // Set callback for bottom sheet state changes
+//        bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+//            override fun onStateChanged(bottomSheet: View, newState: Int) {
+//                // Handle state changes
+//            }
+//
+//            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+//                // Handle sliding animation
+//            }
+//        })
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
