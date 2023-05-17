@@ -22,7 +22,7 @@ import com.google.android.gms.maps.model.*
 import com.google.maps.android.ui.IconGenerator
 
 
-class MapFragment : Fragment(),OnInfoWindowClickListener {
+class MapFragment : Fragment(){
 
 
     private val callback = OnMapReadyCallback { googleMap ->
@@ -53,6 +53,7 @@ class MapFragment : Fragment(),OnInfoWindowClickListener {
                 snippet(place.Description)
                 icon(BitmapDescriptorFactory.fromBitmap((iconGenerator.makeIcon(count.toString()))))
             })
+            googleMap.setInfoWindowAdapter(MyInfoWindowAdapter(requireContext()))
 
         }
 
@@ -75,9 +76,7 @@ class MapFragment : Fragment(),OnInfoWindowClickListener {
         mapFragment?.getMapAsync(callback)
     }
 
-    override fun onInfoWindowClick(p0: Marker) {
-        
-    }
+  
 
 
 }
