@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    >
+
+
+    <ImageView
+        android:id="@+id/ivFoodIconResult"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.25"
+        android:scaleType="centerCrop"
+        android:src="@drawable/noodels"
+        />
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_regular"
+        android:text="1. Mini Pancake"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/ivFoodIconResult"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RelativeLayout
+        android:id="@+id/rlRate"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toEndOf="@+id/ivFoodIconResult"
+        app:layout_constraintTop_toBottomOf="@+id/tvName">
+
+        <ImageView
+            android:id="@+id/ivIcon"
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/icecream_icon" />
+
+        <TextView
+            android:id="@+id/tvRatingPlace"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:layout_toRightOf="@+id/ivIcon"
+            android:fontFamily="@font/roboto_regular"
+            android:text="Rating 9.2"
+            android:textSize="14sp" />
+        <ImageView
+            android:id="@+id/dotCircle1"
+            android:layout_width="4dp"
+            android:layout_height="4dp"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="7dp"
+            android:layout_toRightOf="@+id/tvRatingPlace"
+            android:background="@drawable/dot_circle" />
+
+        <TextView
+            android:id="@+id/tvTotalReviews"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/dotCircle1"
+            android:fontFamily="@font/roboto_regular"
+            android:text="(112) Reviews"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvCafeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_regular"
+        android:text="San Fancisco Restaurant"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toEndOf="@+id/ivFoodIconResult"
+        app:layout_constraintTop_toBottomOf="@+id/rlRate" />
+
+    <TextView
+        android:id="@+id/tvAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:fontFamily="@font/roboto_regular"
+        android:text="121 El Camino Real, San Francisco, CA"
+        android:textSize="14sp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toEndOf="@+id/ivFoodIconResult"
+        app:layout_constraintTop_toBottomOf="@+id/tvCafeName" />
+
+    <RelativeLayout
+        android:id="@+id/rldistance"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toEndOf="@+id/ivFoodIconResult"
+        app:layout_constraintTop_toBottomOf="@+id/tvAddress">
+        <ImageView
+            android:id="@+id/ivMapIcon"
+            android:layout_width="18dp"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/baseline_location_on_24" />
+
+        <TextView
+            android:id="@+id/tvDistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:fontFamily="@font/roboto_light"
+            android:text="0.2 mi"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:layout_toRightOf="@id/ivMapIcon"
+            />
+
+        <ImageView
+            android:id="@+id/dotCircle2"
+            android:layout_width="4dp"
+            android:layout_height="4dp"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="7dp"
+            android:layout_toRightOf="@+id/tvDistance"
+            android:background="@drawable/dot_circle" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Open Now"
+            android:textColor="@color/blue"
+            android:textSize="14sp"
+            android:layout_toRightOf="@id/dotCircle2"
+            android:fontFamily="@font/roboto_condensed_regular"/>
+
+
+    </RelativeLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

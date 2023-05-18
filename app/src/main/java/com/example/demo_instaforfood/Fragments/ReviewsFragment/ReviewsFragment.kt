@@ -1,4 +1,4 @@
-package com.example.demo_instaforfood.ReviewsFragment
+package com.example.demo_instaforfood.Fragments.ReviewsFragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
