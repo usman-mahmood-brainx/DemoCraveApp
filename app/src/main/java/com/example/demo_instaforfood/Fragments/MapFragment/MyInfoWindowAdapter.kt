@@ -1,4 +1,4 @@
-package com.example.demo_instaforfood.MapFragment
+package com.example.demo_instaforfood.Fragments.MapFragment
 
 import android.content.Context
 import android.graphics.*

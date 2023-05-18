@@ -21,4 +21,8 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="horizantalScrollViewStyle">
+        <item name="android:scrollbars">none</item>
+    </style>
+
 </resources>

@@ -1,4 +1,4 @@
-package com.example.demo_instaforfood.ReviewsFragment
+package com.example.demo_instaforfood.Fragments.ReviewsFragment
 
 import android.view.LayoutInflater
 import android.view.View

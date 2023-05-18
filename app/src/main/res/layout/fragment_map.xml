@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MapFragment.MapFragment">
+    tools:context=".Fragments.MapFragment.MapFragment">
 
 
     <TextView
@@ -61,61 +61,178 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <FrameLayout
-        android:id="@+id/mapContainer"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cvSearchBar">
-
-        <fragment
-            android:id="@+id/map"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
+        <FrameLayout
+            android:id="@+id/mapContainer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </FrameLayout>
+            android:layout_height="0dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cvSearchBar">
+
+            <fragment
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </FrameLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintHeight_percent="0.6"-->
-        >
+        <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--        app:layout_constraintHeight_percent="0.6"-->
         <LinearLayout
             android:id="@+id/bottomSheet"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:background="@android:color/white"
+            android:orientation="vertical"
             app:behavior_hideable="false"
-            app:behavior_peekHeight="30dp"
-            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+            app:behavior_peekHeight="25dp"
 
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+            <!--        app:behavior_peekHeight="30dp"-->
             <View
                 android:id="@+id/ivMinimize"
-                android:layout_width="100dp"
-                android:layout_height="8dp"
-                android:background="@drawable/minimize_shape"
+                android:layout_width="80dp"
+                android:layout_height="11dp"
+                android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:layout_gravity="center"/>
+                android:background="@drawable/minimize_shape" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/horizantalScrollViewStyle"
+                android:padding="5dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_marginVertical="10dp"
+                    android:paddingVertical="5dp"
+
+                    >
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/circle_button"
+                        android:paddingVertical="10dp"
+                        android:paddingHorizontal="15dp"
+                        android:layout_gravity="center"
+                        >
+
+                        <TextView
+                            android:id="@+id/tvALl"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="All"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:fontFamily="@font/roboto_bold"
+                            android:textSize="15sp"
+                            />
+                        <TextView
+                            android:id="@+id/tvNineRating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@id/tvALl"
+                            android:text="9+"
+                            android:textSize="15sp"
+                            android:textColor="@color/black"
+                            android:layout_marginStart="10dp"
+                            android:fontFamily="@font/roboto_regular"  />
+                        <ImageView
+                            android:id="@+id/ivIceCreamIc1"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_toRightOf="@id/tvNineRating"
+                            android:src="@drawable/icecream_icon"
+                            android:layout_marginStart="5dp"/>
+                        <TextView
+                            android:id="@+id/tvSevenRating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@id/ivIceCreamIc1"
+                            android:text="7+"
+                            android:textSize="15sp"
+                            android:textColor="@color/black"
+                            android:layout_marginStart="10dp"
+                            android:fontFamily="@font/roboto_regular"  />
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/icecream_icon"
+                            android:layout_toRightOf="@id/tvSevenRating"
+                            android:layout_marginStart="5dp"
+                            />
+
+                    </RelativeLayout>
+                    <Button
+                        android:id="@+id/btnSort"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sort"
+                        android:textSize="14sp"
+                        android:textAllCaps="false"
+                        android:textColor="@color/black"
+                        android:drawableEnd="@drawable/down_arrow_icon"
+                        android:background="@drawable/circle_button2"
+                        android:paddingHorizontal="18dp"
+                        app:backgroundTint="@null"
+                        android:layout_marginStart="5dp"
+                        />
+                    <Button
+                        android:id="@+id/btnOpenNow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Open Now"
+                        android:textSize="14sp"
+                        android:textAllCaps="false"
+                        android:textColor="@color/black"
+                        android:background="@drawable/circle_button2"
+                        android:paddingHorizontal="18dp"
+                        app:backgroundTint="@null"
+                        android:layout_marginStart="5dp"
+                        />
+                    <ImageButton
+                        android:id="@+id/btnfilter"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/filter_icon"
+                        android:background="@drawable/circle_button2"
+                        android:scaleType="center"
+                        app:backgroundTint="@null"
+                        android:layout_marginHorizontal="5dp"
+                        />
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:text="All Results"
-                android:textSize="20sp"
                 android:textColor="@color/black"
-                android:textStyle="bold"/>
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvFoodResult"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:listitem="@layout/result_item_layout"
-                />
+                tools:listitem="@layout/result_item_layout" />
         </LinearLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

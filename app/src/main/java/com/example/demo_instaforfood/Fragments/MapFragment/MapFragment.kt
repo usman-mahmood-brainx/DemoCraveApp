@@ -1,4 +1,4 @@
-package com.example.demo_instaforfood.MapFragment
+package com.example.demo_instaforfood.Fragments.MapFragment
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -61,7 +61,14 @@ class MapFragment : Fragment(){
             googleMap.setInfoWindowAdapter(MyInfoWindowAdapter(requireContext()))
 
         }
-
+        googleMap.setOnMarkerClickListener {
+            if (it.isInfoWindowShown){
+                it.hideInfoWindow()
+            }
+            else{
+                it.showInfoWindow()
+            }
+            true }
         // Add a marker in Sydney and move the camera
 //        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(boundsBuilder.build(),1000,1000,0))
         googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(boundsBuilder.build(),500,500,0))

@@ -4,8 +4,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.demo_instaforfood.MapFragment.MapFragment
-import com.example.demo_instaforfood.ReviewsFragment.ReviewsFragment
+import com.example.demo_instaforfood.Fragments.MapFragment.MapFragment
+import com.example.demo_instaforfood.Fragments.ReviewsFragment.ReviewsFragment
 
 private val NUM_TABS = 4
 
