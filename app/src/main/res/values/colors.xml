@@ -11,4 +11,5 @@
     <color name="lightBrown">#8FC4A763</color>
     <color name="lightGrey">#DADADA</color>
     <color name="blue">#0D99FF</color>
+    <color name="dynmic_color">#0D99FF</color>
 </resources>
