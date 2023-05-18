@@ -9,7 +9,8 @@ import dagger.hilt.android.AndroidEntryPoint
 private val tabsArray = arrayOf(
     "Reviews",
     "Map",
-    "Category"
+    "Category",
+    "Cities"
 )
 
 @AndroidEntryPoint

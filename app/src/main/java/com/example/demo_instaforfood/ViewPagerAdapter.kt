@@ -8,7 +8,7 @@ import com.example.demo_instaforfood.Fragments.CategoryFragment.CategoryFragment
 import com.example.demo_instaforfood.Fragments.MapFragment.MapFragment
 import com.example.demo_instaforfood.Fragments.ReviewsFragment.ReviewsFragment
 
-private val NUM_TABS = 3
+private val NUM_TABS = 4
 
 class ViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fragmentManager, lifecycle) {

@@ -7,13 +7,13 @@
     tools:context=".Fragments.CategoryFragment.CategoryFragment">
 
     <TextView
-        android:id="@+id/tvLabelReviewMap"
+        android:id="@+id/tvLabelReviewByDish"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="15dp"
-        android:fontFamily="@font/roboto_regular"
-        android:text="Review Map"
+        android:fontFamily="@font/roboto_condensed_regular"
+        android:text="Your Reviews By Dish"
         android:textColor="@color/black"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -24,10 +24,10 @@
     <RelativeLayout
         android:id="@+id/rlChart"
         android:layout_width="0dp"
-        android:layout_height="240dp"
+        android:layout_height="250dp"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvLabelReviewMap"
+        app:layout_constraintTop_toBottomOf="@+id/tvLabelReviewByDish"
         app:layout_constraintWidth_percent="0.5"
         android:padding="10dp"
         >
@@ -45,27 +45,43 @@
             android:id="@+id/pieChart"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
+<!--        <TextView-->
+<!--            android:id="@+id/tvTotalLabel"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_above="@+id/tvSum"-->
+<!--            android:layout_centerInParent="true"-->
+<!--            android:text="total"-->
+<!--            -->
+<!--            android:textColor="#4E5961"-->
+<!--            android:textSize="20sp" />-->
+
         <TextView
             android:id="@+id/tvSum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
+            android:layout_centerInParent="true"
+            android:gravity="top"
             android:text="555"
             android:textColor="#4E5961"
-            android:textStyle="bold"
-            android:layout_centerInParent="true"/>
+            android:textSize="40sp"
+            android:textStyle="bold" />
 
 
 
     </RelativeLayout>
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCategories"
         android:layout_width="0dp"
         android:layout_height="250dp"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toEndOf="@+id/rlChart"
-        app:layout_constraintTop_toBottomOf="@+id/tvLabelReviewMap"
+        app:layout_constraintTop_toBottomOf="@+id/tvLabelReviewByDish"
         android:paddingHorizontal="10dp"
-        app:layout_constraintWidth_percent="0.5"/>
+        app:layout_constraintWidth_percent="0.5"
+        tools:listitem="@layout/category_item_layout"
+        />
 
 
 

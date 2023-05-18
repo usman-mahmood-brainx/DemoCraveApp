@@ -1,24 +1,20 @@
 package com.example.demo_instaforfood.Fragments.CategoryFragment
 
 import android.graphics.Color
-import android.graphics.drawable.ClipDrawable
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.demo_instaforfood.Models.Category
 import com.example.demo_instaforfood.R
-import com.example.demo_instaforfood.TempModels.Item
 import com.example.demo_instaforfood.databinding.FragmentCategoryBinding
 import com.github.mikephil.charting.animation.Easing
-import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
-import com.github.mikephil.charting.highlight.Highlight
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 
 class CategoryFragment : Fragment() {
 
@@ -31,25 +27,42 @@ class CategoryFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentCategoryBinding.inflate(inflater)
-        
-        val pieChart = binding.pieChart
-       
 
-        val unsortedList = listOf(
-            Item("Bread", 40, Color.BLUE),
-            Item("Cake", 30, Color.RED),
-            Item("Coke", 60, Color.GREEN)
+        val categoryList = listOf(
+            Category("Brunch",460,ContextCompat.getColor(requireContext(),R.color.lightBrown)),
+            Category("Burgers", 61, Color.BLUE),
+            Category("Pizza", 26, Color.RED),
+            Category("Bangels", 3, Color.GREEN)
         )
 
-        val itemList = unsortedList.sortedByDescending { it.value }
+        pieChartSetup(categoryList)
+
+
+
+        val categoryAdapter = CategoryAdapter(categoryList)
+        binding.rvCategories.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvCategories.adapter = categoryAdapter
+        binding.rvCategories.setOverScrollMode(View.OVER_SCROLL_NEVER);
+
+
+
+
+        return binding.root
+
+    }
+
+    private fun pieChartSetup(categoryList: List<Category>) {
+
+
+        val sortedCategoryList = categoryList.sortedByDescending { it.totalReviws }
         var sum = 0
         val pieEntries = mutableListOf<PieEntry>()
         val colors = mutableListOf<Int>()
 
-        for (item in itemList) {
-            pieEntries.add(PieEntry(item.value.toFloat(), item.name))
-            colors.add(item.color)
-            sum += item.value
+        for (category in sortedCategoryList) {
+            pieEntries.add(PieEntry(category.totalReviws.toFloat(), category.name))
+            colors.add(category.color)
+            sum += category.totalReviws
         }
 
         val dataSet = PieDataSet(pieEntries, "")
@@ -60,24 +73,18 @@ class CategoryFragment : Fragment() {
         data.setValueTextSize(0f)
         data.setValueTextColor(Color.WHITE)
 
-        pieChart.data = data
-        pieChart.description.isEnabled = false
-        pieChart.setDrawEntryLabels(false)
-        pieChart.legend.isEnabled = false
-        pieChart.isRotationEnabled = false
-        pieChart.setTouchEnabled(false)
+        binding.pieChart.data = data
+        binding.pieChart.description.isEnabled = false
+        binding.pieChart.setDrawEntryLabels(false)
+        binding.pieChart.legend.isEnabled = false
+        binding.pieChart.isRotationEnabled = false
+        binding.pieChart.setTouchEnabled(false)
+        binding.pieChart.setHoleRadius(75f)
 
-        pieChart.setHoleRadius(75f)
-        
-
-        pieChart.animateY(1000, Easing.EaseInOutQuad)
-        pieChart.invalidate()
+        binding.pieChart.animateY(1000, Easing.EaseInOutQuad)
+        binding.pieChart.invalidate()
 
         binding.tvSum.text = "$sum"
-
-
-
-        return binding.root
 
     }
 
