@@ -22,6 +22,7 @@ class ViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
             0 -> return ReviewsFragment()
             1 -> return MapFragment()
             2 -> return CategoryFragment()
+            3 -> return CategoryFragment()
 
         }
         return ReviewsFragment()

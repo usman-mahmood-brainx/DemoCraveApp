@@ -12,4 +12,17 @@
     <color name="lightGrey">#DADADA</color>
     <color name="blue">#0D99FF</color>
     <color name="dynmic_color">#0D99FF</color>
+    <color name="simple_back2">#CFCFCF</color>
+
+    <color name="brunch">#5499CB</color>
+    <color name="burgers">#E27E46</color>
+    <color name="pizza">#C23E38</color>
+    <color name="bangels">#6EB895</color>
+    <color name="tacos">#597896</color>
+    <color name="donuts">#6DB9C7</color>
+    <color name="coffe">#F1B65A</color>
+    <color name="bar">#72202E</color>
+    
+    
+    
 </resources>
