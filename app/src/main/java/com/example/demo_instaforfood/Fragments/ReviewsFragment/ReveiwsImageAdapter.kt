@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.demo_instaforfood.Models.ReviewImage
 import com.example.demo_instaforfood.R
 
@@ -31,7 +32,14 @@ class ReveiwsImageAdapter(
 
     // binds the list items to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.ivReview.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.image_noodles))
+
+//        val image = imagesList[position]
+
+//        Glide.with(holder.ivReview)
+//            .load("drawable/noodels.png")
+//            .into(holder.ivReview)
+
+//        holder.ivReview.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.image_noodles))
     }
 
     // return the number of the items in the list

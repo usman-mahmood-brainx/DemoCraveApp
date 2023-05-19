@@ -31,6 +31,7 @@ class ReveiwsImagesPagingAdapter : PagingDataAdapter<Data, ReveiwsImagesPagingAd
 
         Glide.with(holder.ivReview)
             .load(data?.avatar)
+            .override(com.bumptech.glide.request.target.Target.SIZE_ORIGINAL)
             .into(holder.ivReview)
 //        holder.ivReview.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.noodels))
 

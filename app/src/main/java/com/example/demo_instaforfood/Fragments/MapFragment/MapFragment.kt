@@ -62,7 +62,7 @@ class MapFragment : Fragment() {
                 marker = it
                 it.showInfoWindow()
             }
-            false
+            true
         }
 
 //        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(boundsBuilder.build(),1000,1000,0))
