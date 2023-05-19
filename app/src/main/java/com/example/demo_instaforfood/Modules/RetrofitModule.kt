@@ -13,7 +13,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 @Module
 class RetrofitModule {
-
     @Singleton
     @Provides
     fun getRetrofit(): Retrofit {

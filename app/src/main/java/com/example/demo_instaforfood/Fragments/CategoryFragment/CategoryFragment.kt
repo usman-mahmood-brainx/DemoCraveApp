@@ -45,7 +45,6 @@ class CategoryFragment : Fragment() {
         reviewsListSetup(categoryList)
         dynamicTabsSetup(categoryList)
 
-
         return binding.root
 
     }
@@ -94,8 +93,6 @@ class CategoryFragment : Fragment() {
         binding.tvSum.text = "$sum"
 
     }
-
-
     private fun dynamicTabsSetup(categoryList: List<Category>) {
 //        val dynamicFragmentList = categoryList.map {
 //            DynamicFragment.newInstance(it.name,it.totalReviws)

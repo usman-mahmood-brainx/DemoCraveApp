@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.MapFragment.MapFragment">
 
-
     <TextView
         android:id="@+id/tvLabelReviewMap"
         android:layout_width="0dp"
@@ -14,7 +13,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="15dp"
         android:fontFamily="@font/roboto_regular"
-        android:text="Review Map"
+        android:text="@string/review_map"
         android:textColor="@color/black"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -22,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
+    <!--    Search Bar-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cvSearchBar"
         android:layout_width="match_parent"
@@ -30,7 +29,7 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="10dp"
-        android:background="@drawable/search_border"
+        android:background="@drawable/shape_search_border"
         android:paddingVertical="12dp"
         android:paddingStart="12dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,7 +40,7 @@
             android:id="@+id/imageView"
             android:layout_width="20dp"
             android:layout_height="18dp"
-            android:src="@drawable/search"
+            android:src="@drawable/ic_search"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -53,35 +52,35 @@
             android:layout_marginStart="5dp"
             android:background="@null"
             android:hint="Search"
-            android:textSize="15sp"
+            android:textSize="@dimen/medium_text_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+<!--    Map-->
+    <FrameLayout
+        android:id="@+id/mapContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cvSearchBar">
 
-        <FrameLayout
-            android:id="@+id/mapContainer"
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cvSearchBar">
+            android:layout_height="match_parent" />
+    </FrameLayout>
 
-            <fragment
-                android:id="@+id/map"
-                android:name="com.google.android.gms.maps.SupportMapFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </FrameLayout>
-
+<!--    Bottom Sheet-->
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--        app:layout_constraintHeight_percent="0.6"-->
+
         <LinearLayout
             android:id="@+id/bottomSheet"
             android:layout_width="match_parent"
@@ -90,132 +89,127 @@
             android:orientation="vertical"
             app:behavior_hideable="false"
             app:behavior_peekHeight="28dp"
-
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
-            <!--        app:behavior_peekHeight="30dp"-->
+
             <View
                 android:id="@+id/ivMinimize"
                 android:layout_width="80dp"
                 android:layout_height="11dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/minimize_shape" />
+                android:background="@drawable/ic_minimize" />
 
             <HorizontalScrollView
+                style="@style/horizantalScrollViewStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/horizantalScrollViewStyle"
-                android:padding="5dp"
-                >
+                android:padding="5dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_marginHorizontal="5dp"
                     android:layout_marginVertical="10dp"
-                    android:paddingVertical="5dp"
-
-                    >
+                    android:orientation="horizontal"
+                    android:paddingVertical="5dp">
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/circle_button"
-                        android:paddingVertical="10dp"
-                        android:paddingHorizontal="15dp"
                         android:layout_gravity="center"
-                        >
+                        android:background="@drawable/shape_circle_grey"
+                        android:paddingHorizontal="15dp"
+                        android:paddingVertical="10dp">
 
                         <TextView
                             android:id="@+id/tvALl"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_bold"
                             android:text="All"
                             android:textColor="@color/black"
-                            android:textStyle="bold"
-                            android:fontFamily="@font/roboto_bold"
-                            android:textSize="15sp"
-                            />
+                            android:textSize="@dimen/medium_text_size"
+                            android:textStyle="bold" />
+
                         <TextView
                             android:id="@+id/tvNineRating"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_toRightOf="@id/tvALl"
-                            android:text="9+"
-                            android:textSize="15sp"
-                            android:textColor="@color/black"
                             android:layout_marginStart="10dp"
-                            android:fontFamily="@font/roboto_regular"  />
+                            android:layout_toRightOf="@id/tvALl"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="9+"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/medium_text_size" />
+
                         <ImageView
                             android:id="@+id/ivIceCreamIc1"
                             android:layout_width="20dp"
                             android:layout_height="20dp"
+                            android:layout_marginStart="5dp"
                             android:layout_toRightOf="@id/tvNineRating"
-                            android:src="@drawable/icecream_icon"
-                            android:layout_marginStart="5dp"/>
+                            android:src="@drawable/ic_icecream" />
+
                         <TextView
                             android:id="@+id/tvSevenRating"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_toRightOf="@id/ivIceCreamIc1"
-                            android:text="7+"
-                            android:textSize="15sp"
-                            android:textColor="@color/black"
                             android:layout_marginStart="10dp"
-                            android:fontFamily="@font/roboto_regular"  />
+                            android:layout_toRightOf="@id/ivIceCreamIc1"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="7+"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/medium_text_size" />
+
                         <ImageView
                             android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:src="@drawable/icecream_icon"
-                            android:layout_toRightOf="@id/tvSevenRating"
                             android:layout_marginStart="5dp"
-                            />
+                            android:layout_toRightOf="@id/tvSevenRating"
+                            android:src="@drawable/ic_icecream" />
 
                     </RelativeLayout>
+
                     <Button
                         android:id="@+id/btnSort"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:background="@drawable/shape_circle_white"
+                        android:drawableEnd="@drawable/ic_sort"
+                        android:paddingHorizontal="18dp"
                         android:text="Sort"
-                        android:textSize="14sp"
                         android:textAllCaps="false"
                         android:textColor="@color/black"
-                        android:drawableEnd="@drawable/down_arrow_icon"
-                        android:background="@drawable/circle_button2"
-                        android:paddingHorizontal="18dp"
-                        app:backgroundTint="@null"
-                        android:layout_marginStart="5dp"
-                        />
+                        android:textSize="@dimen/medium_text_size"
+                        app:backgroundTint="@null" />
+
                     <Button
                         android:id="@+id/btnOpenNow"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:background="@drawable/shape_circle_white"
+                        android:paddingHorizontal="18dp"
                         android:text="Open Now"
-                        android:textSize="14sp"
                         android:textAllCaps="false"
                         android:textColor="@color/black"
-                        android:background="@drawable/circle_button2"
-                        android:paddingHorizontal="18dp"
-                        app:backgroundTint="@null"
-                        android:layout_marginStart="5dp"
-                        />
+                        android:textSize="@dimen/medium_text_size"
+                        app:backgroundTint="@null" />
+
                     <ImageButton
                         android:id="@+id/btnfilter"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:src="@drawable/filter_icon"
-                        android:background="@drawable/circle_button2"
-                        android:foregroundGravity="center"
-                        app:backgroundTint="@null"
                         android:layout_marginHorizontal="5dp"
-                        />
+                        android:background="@drawable/shape_circle_white"
+                        android:foregroundGravity="center"
+                        android:src="@drawable/ic_filter"
+                        app:backgroundTint="@null" />
 
                 </LinearLayout>
 
             </HorizontalScrollView>
-
-
 
             <TextView
                 android:layout_width="wrap_content"
@@ -223,7 +217,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:text="All Results"
+                android:text="@string/all_results"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -232,8 +226,10 @@
                 android:id="@+id/rvFoodResult"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:listitem="@layout/result_item_layout" />
+                tools:listitem="@layout/item_result" />
+
         </LinearLayout>
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

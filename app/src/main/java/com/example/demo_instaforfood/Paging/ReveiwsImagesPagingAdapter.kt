@@ -1,19 +1,15 @@
 package com.example.demo_instaforfood.Paging
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.core.content.ContextCompat
-import androidx.paging.ExperimentalPagingApi
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.demo_instaforfood.Models.ReviewImage
 import com.example.demo_instaforfood.R
-import com.example.demo_instaforfood.TempModels.Data
+import com.example.demo_instaforfood.TemporaryModels.Data
 
 
 class ReveiwsImagesPagingAdapter : PagingDataAdapter<Data, ReveiwsImagesPagingAdapter.ViewHolder>(COMPARATOR) {
@@ -24,7 +20,7 @@ class ReveiwsImagesPagingAdapter : PagingDataAdapter<Data, ReveiwsImagesPagingAd
         // inflates the card_view_design view
         // that is used to hold list item
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.review_image_layout, parent, false)
+            .inflate(R.layout.item_review, parent, false)
 
         return ViewHolder(view)
     }

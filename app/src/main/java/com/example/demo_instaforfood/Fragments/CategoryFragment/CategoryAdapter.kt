@@ -1,6 +1,5 @@
 package com.example.demo_instaforfood.Fragments.CategoryFragment
 
-import android.graphics.PorterDuff
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +21,7 @@ class CategoryAdapter(private var categoryList: List<Category>) : RecyclerView.A
         // inflates the card_view_design view
         // that is used to hold list item
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.category_item_layout, parent, false)
+            .inflate(R.layout.item_category, parent, false)
 
         return ViewHolder(view)
     }

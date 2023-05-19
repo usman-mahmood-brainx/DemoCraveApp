@@ -18,7 +18,7 @@ class ReviewsFragment : Fragment() {
 
     lateinit var reviewsBinding: FragmentReviewsBinding
     lateinit var appViewModel: AppViewModel
-    lateinit var adapter: ReveiwsImagesPagingAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -35,22 +35,30 @@ class ReviewsFragment : Fragment() {
         )
 
         val MenuRatingAdapter = MenuRatingAdapter(menuRatinglist)
-        reviewsBinding.rvMenuRatings.layoutManager = LinearLayoutManager(requireContext())
-        reviewsBinding.rvMenuRatings.adapter = MenuRatingAdapter
+        MenuRatingsSetup(MenuRatingAdapter)
 
+        val reveiwsImagesPagingAdapter = ReveiwsImagesPagingAdapter()
+        ReviewImagesSetup(reveiwsImagesPagingAdapter)
         appViewModel = ViewModelProvider(requireActivity()).get(AppViewModel::class.java)
-        adapter = ReveiwsImagesPagingAdapter()
-        reviewsBinding.rvReviewImages.layoutManager = GridLayoutManager(requireContext(),3)
-        reviewsBinding.rvReviewImages.adapter = adapter
+
         
         appViewModel.list.observe(requireActivity(),{
-            adapter.submitData(lifecycle,it)
+            reveiwsImagesPagingAdapter.submitData(lifecycle,it)
         })
 
         return reviewsBinding.root
     }
 
+    private fun MenuRatingsSetup(MenuRatingAdapter: MenuRatingAdapter,) {
+        reviewsBinding.rvMenuRatings.layoutManager = LinearLayoutManager(requireContext())
+        reviewsBinding.rvMenuRatings.adapter = MenuRatingAdapter
 
+    }
+
+    private fun ReviewImagesSetup(reveiwsImagesPagingAdapter: ReveiwsImagesPagingAdapter) {
+        reviewsBinding.rvReviewImages.layoutManager = GridLayoutManager(requireContext(),3)
+        reviewsBinding.rvReviewImages.adapter = reveiwsImagesPagingAdapter
+    }
 
 
 }

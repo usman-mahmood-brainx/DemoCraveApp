@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingVertical="10dp"
     android:paddingHorizontal="5dp"
-    >
+    android:paddingVertical="10dp">
 
     <ImageView
         android:id="@+id/ivFoodIconRated"
         android:layout_width="160dp"
-        android:layout_height="110dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/dessert_image"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@drawable/image_dessert"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,10 +25,11 @@
         android:fontFamily="@font/roboto_regular"
         android:text="1. Mini Pancake"
         android:textColor="@color/black"
-        android:textSize="15sp"
+        android:textSize="@dimen/medium_text_size"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivFoodIconRated" />
+
     <RelativeLayout
         android:id="@+id/rlRate"
         android:layout_width="wrap_content"
@@ -38,22 +38,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvName">
 
-    <ImageView
-        android:id="@+id/ivIcon"
-        android:layout_width="20dp"
-        android:layout_height="match_parent"
-        android:scaleType="fitXY"
-        app:srcCompat="@drawable/icecream_icon" />
+        <ImageView
+            android:id="@+id/ivIcon"
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/ic_icecream" />
 
-    <TextView
-        android:id="@+id/tvRatingPlace"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginStart="5dp"
-        android:layout_toRightOf="@+id/ivIcon"
-        android:fontFamily="@font/roboto_regular"
-        android:text="Rating 9.2"
-        android:textSize="14sp" />
+        <TextView
+            android:id="@+id/tvRatingPlace"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:layout_toRightOf="@+id/ivIcon"
+            android:fontFamily="@font/roboto_regular"
+            android:text="Rating 9.2"
+            android:textSize="@dimen/medium_text_size" />
+
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

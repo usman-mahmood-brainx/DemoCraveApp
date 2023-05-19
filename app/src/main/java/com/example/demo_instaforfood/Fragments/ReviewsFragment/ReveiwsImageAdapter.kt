@@ -24,21 +24,14 @@ class ReveiwsImageAdapter(
         // inflates the card_view_design view
         // that is used to hold list item
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.review_image_layout, parent, false)
+            .inflate(R.layout.item_review, parent, false)
 
         return ViewHolder(view)
     }
 
     // binds the list items to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
-        val image = imagesList[position]
-
-//        Glide.with(holder.ivReview)
-//            .load("drawable/noodels.png")
-//            .into(holder.ivReview)
-
-        holder.ivReview.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.noodels))
+        holder.ivReview.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.image_noodles))
     }
 
     // return the number of the items in the list

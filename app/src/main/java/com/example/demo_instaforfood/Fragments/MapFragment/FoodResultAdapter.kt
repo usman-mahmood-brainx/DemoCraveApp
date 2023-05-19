@@ -3,7 +3,6 @@ package com.example.demo_instaforfood.Fragments.MapFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.demo_instaforfood.Models.FoodResult
@@ -20,7 +19,7 @@ class FoodResultAdapter(private var foodResultList: List<FoodResult>) : Recycler
         // inflates the card_view_design view
         // that is used to hold list item
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.result_item_layout, parent, false)
+            .inflate(R.layout.item_result, parent, false)
 
         return ViewHolder(view)
     }

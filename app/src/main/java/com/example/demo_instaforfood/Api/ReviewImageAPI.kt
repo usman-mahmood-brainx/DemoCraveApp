@@ -1,8 +1,7 @@
 package com.example.demo_instaforfood.Api
 
 
-import com.example.demo_instaforfood.TempModels.ResponseListUsers
-import retrofit2.Response
+import com.example.demo_instaforfood.TemporaryModels.ResponseListUsers
 import retrofit2.http.GET
 import retrofit2.http.Query
 
