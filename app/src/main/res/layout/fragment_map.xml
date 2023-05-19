@@ -89,7 +89,7 @@
             android:background="@android:color/white"
             android:orientation="vertical"
             app:behavior_hideable="false"
-            app:behavior_peekHeight="25dp"
+            app:behavior_peekHeight="28dp"
 
             app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
             <!--        app:behavior_peekHeight="30dp"-->
