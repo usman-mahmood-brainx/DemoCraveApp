@@ -3,27 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-  
-    app:cardCornerRadius="24dp"
+    app:cardCornerRadius="25dp"
     app:cardElevation="1dp"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="280dp"
         android:paddingBottom="10dp"
+
+
         >
 
         <ImageView
             android:id="@+id/ivFoodIcon"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
             android:src="@drawable/noodels"
+            app:layout_constraintHeight_percent="0.6"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.64"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+
             />
 
         <TextView
@@ -117,7 +119,7 @@
             android:id="@+id/tvDistance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
+            android:layout_marginEnd="10dp"
             android:fontFamily="@font/roboto_light"
             android:text="0.2 mi"
             android:textColor="@color/black"

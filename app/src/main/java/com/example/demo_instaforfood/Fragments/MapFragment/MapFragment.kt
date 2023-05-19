@@ -61,11 +61,14 @@ class MapFragment : Fragment(){
             googleMap.setInfoWindowAdapter(MyInfoWindowAdapter(requireContext()))
 
         }
+        var marker: Marker? = null
         googleMap.setOnMarkerClickListener {
-            if (it.isInfoWindowShown){
+            if(marker != null && marker?.id == it.id){
                 it.hideInfoWindow()
+                marker = null
             }
-            else{
+            else if(marker == null){
+                marker = it
                 it.showInfoWindow()
             }
             true }

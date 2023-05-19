@@ -31,7 +31,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/search_border"
-        android:paddingVertical="10dp"
+        android:paddingVertical="12dp"
         android:paddingStart="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,7 +65,7 @@
             android:id="@+id/mapContainer"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cvSearchBar">
@@ -206,7 +206,7 @@
                         android:layout_height="50dp"
                         android:src="@drawable/filter_icon"
                         android:background="@drawable/circle_button2"
-                        android:scaleType="center"
+                        android:foregroundGravity="center"
                         app:backgroundTint="@null"
                         android:layout_marginHorizontal="5dp"
                         />

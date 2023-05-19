@@ -75,5 +75,8 @@ dependencies {
     // For Custom Map Marker
     implementation 'com.google.maps.android:android-maps-utils:3.4.0'
 
+    // PieChart Library
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+   
 
 }
