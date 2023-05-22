@@ -11,4 +11,6 @@
     <string name="all_results">All Results</string>
     <string name="top_rated">Top 5 Rated</string>
     <string name="see_all">See all</string>
+    <string name="welcome">Welcome to ClientDex</string>
+    <string name="enter_email">Enter your email address and password to continue</string>
 </resources>

@@ -13,6 +13,7 @@
     <color name="blue">#0D99FF</color>
     <color name="dynmic_color">#0D99FF</color>
     <color name="simple_back2">#CFCFCF</color>
+    <color name="navy">#29304D</color>
 
 
     <color name="brunch">#5499CB</color>
@@ -23,7 +24,9 @@
     <color name="donuts">#6DB9C7</color>
     <color name="coffe">#F1B65A</color>
     <color name="bar">#72202E</color>
-    
-    
-    
+
+    <color name="grey2">#929498</color>
+    <color name="darkblue">#2573D5</color>
+
+
 </resources>
