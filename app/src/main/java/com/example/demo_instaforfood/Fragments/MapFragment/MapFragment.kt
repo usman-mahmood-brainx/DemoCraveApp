@@ -34,6 +34,7 @@ class MapFragment : Fragment() {
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private val  LOCATION_PERMISSION_REQUEST_CODE = 101
     private var locationPermission = MutableLiveData<Boolean>(false)
+    private var marker: Marker? = null
 
 
     @SuppressLint("PotentialBehaviorOverride")
@@ -68,7 +69,7 @@ class MapFragment : Fragment() {
             googleMap.setInfoWindowAdapter(MyInfoWindowAdapter(requireContext()))
 
         }
-        var marker: Marker? = null
+
         googleMap.setOnMarkerClickListener {
             if (marker != null && marker?.id == it.id) {
                 it.hideInfoWindow()
@@ -77,18 +78,14 @@ class MapFragment : Fragment() {
                 marker = it
                 it.showInfoWindow()
             }
+            else{
+                marker?.hideInfoWindow()
+                marker = it
+                it.showInfoWindow()
+            }
             true
         }
 
-//        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(boundsBuilder.build(),1000,1000,0))
-//        googleMap.moveCamera(
-//            CameraUpdateFactory.newLatLngBounds(
-//                boundsBuilder.build(),
-//                500,
-//                500,
-//                0
-//            )
-//        )
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
         if(checkPermission()) {
             locationPermission.postValue(true)
@@ -103,6 +100,7 @@ class MapFragment : Fragment() {
         })
     
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -130,6 +128,7 @@ class MapFragment : Fragment() {
         binding.rvFoodResult.layoutManager = LinearLayoutManager(requireContext())
         binding.rvFoodResult.adapter = foodResultAdapter
 
+
         return binding.root
     }
 
@@ -148,8 +147,8 @@ class MapFragment : Fragment() {
     private fun getCurrentLocation(googleMap: GoogleMap) {
         val locationRequest = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY,100)
             .setWaitForAccurateLocation(false)
-            .setMinUpdateIntervalMillis(500)
-            .setMaxUpdateDelayMillis(5000)
+            .setMinUpdateIntervalMillis(10000)
+            .setMaxUpdateDelayMillis(15000)
             .build()
 
         var previousMarker: Marker? = null
@@ -160,23 +159,14 @@ class MapFragment : Fragment() {
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
         ) {
-//            fusedLocationProviderClient.lastLocation
-//                .addOnSuccessListener { location: Location? ->
-//                    location?.let {
-//                        // Set the map camera position to the current location
-//                        val latLng = LatLng(location.latitude, location.longitude)
-//                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
-//                        // Add a marker at the current location
-//                        googleMap.addMarker(MarkerOptions().position(latLng))
-//                    }
-//                }
+
             fusedLocationProviderClient.requestLocationUpdates(
                 locationRequest,
                 object : com.google.android.gms.location.LocationCallback() {
                     override fun onLocationResult(locationResult: com.google.android.gms.location.LocationResult) {
                         locationResult.lastLocation?.let { location ->
                             val latLng = LatLng(location.latitude, location.longitude)
-                            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+                            googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng))
                             previousMarker?.remove()
                             previousMarker = googleMap.addMarker(MarkerOptions().position(latLng).title("Current Location"))
 

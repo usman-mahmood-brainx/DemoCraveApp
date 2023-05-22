@@ -23,7 +23,7 @@
         android:fontFamily="@font/roboto_regular"
         android:text="Brunch"
         android:textColor="@color/black"
-        android:textSize="12sp"
+        android:textSize="@dimen/small_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tvTotalReviews"
         app:layout_constraintHorizontal_bias="0.3"

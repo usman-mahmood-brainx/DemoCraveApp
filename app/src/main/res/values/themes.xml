@@ -25,4 +25,10 @@
         <item name="android:scrollbars">none</item>
     </style>
 
+    <style name="roundedSquare">
+        <item name="cornerSizeTopLeft">25dp</item>
+        <item name="cornerSizeTopRight">25dp</item>
+
+    </style>
+
 </resources>

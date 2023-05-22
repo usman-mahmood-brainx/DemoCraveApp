@@ -119,7 +119,7 @@
         android:fontFamily="@font/roboto_condensed_regular"
         android:text="@string/all_reviews"
         android:textColor="@color/black"
-        android:textSize="25sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/hline2" />

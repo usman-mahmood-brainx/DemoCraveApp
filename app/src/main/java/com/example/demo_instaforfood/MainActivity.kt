@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
     private fun tabSetup() {
         val adapter = ViewPagerAdapter(supportFragmentManager,lifecycle)
         binding.viewPager.adapter=adapter
+        binding.viewPager.isUserInputEnabled = false
         TabLayoutMediator(binding.tlTabs, binding.viewPager) { tab, position ->
             tab.text = tabsArray[position]
         }.attach()
