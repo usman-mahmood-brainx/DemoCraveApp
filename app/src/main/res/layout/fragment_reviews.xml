@@ -4,25 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.ReviewsFragment.ReviewsFragment"
     android:paddingTop="20dp"
-    >
-
+    tools:context=".Fragments.ReviewsFragment.ReviewsFragment">
 
     <TextView
         android:id="@+id/tvReviewLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:text="Reviews"
+        android:fontFamily="@font/roboto_regular"
+        android:text="@string/reviews"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:fontFamily="@font/roboto_regular"
-        
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvReview"
@@ -31,43 +27,42 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="2dp"
         android:layout_marginRight="50dp"
-        android:text="Member since October 2018 \n223 Reviews"
+        android:fontFamily="@font/roboto_condensed_regular"
+        android:text="@string/member_since"
         android:textColor="@color/black"
-        android:textSize="14sp"
+        android:textSize="@dimen/medium_text_size"
         app:layout_constraintEnd_toStartOf="@+id/rlRating"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvReviewLabel"
-        android:fontFamily="@font/roboto_condensed_regular"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/tvReviewLabel" />
+
     <RelativeLayout
         android:id="@+id/rlRating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginEnd="30dp"
-        >
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <TextView
             android:id="@+id/tvRating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_condensed_regular"
             android:text="7.5"
             android:textColor="@color/black"
             android:textSize="34sp"
-            android:textStyle="bold"
-            android:fontFamily="@font/roboto_condensed_regular"
-            />
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/tvRatingLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rating"
-            android:textColor="@color/black"
-            android:textSize="17sp"
-            android:textStyle="bold"
             android:layout_below="@+id/tvRating"
             android:fontFamily="@font/roboto_condensed_regular"
-            />
+            android:text="@string/rating"
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 
@@ -86,26 +81,24 @@
         android:id="@+id/menItemLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="40dp"
-        android:text="Menu Items Ratings"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/roboto_condensed_regular"
+        android:text="@string/menu_item_rating"
         android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hline"
-        android:fontFamily="@font/roboto_condensed_regular"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/hline" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvMenuRatings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/menItemLabel"
         android:layout_marginTop="10dp"
-        tools:listitem="@layout/menu_item_rating_layout"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/menItemLabel"
+        tools:listitem="@layout/item_menu_rating" />
 
     <View
         android:id="@+id/hline2"
@@ -123,14 +116,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:text="All Reviews"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="25sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hline2"
         android:fontFamily="@font/roboto_condensed_regular"
-        />
+        android:text="@string/all_reviews"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hline2" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvReviewImages"

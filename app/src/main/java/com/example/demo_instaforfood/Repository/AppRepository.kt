@@ -12,7 +12,6 @@ import javax.inject.Inject
 class AppRepository @Inject constructor(
     private val reviewImagesAPI: ReviewImageAPI,
 ) {
-
     fun getImages() = Pager(
         config = PagingConfig(pageSize = 20, maxSize = 100),
         pagingSourceFactory = { ReviewImagesPagingSource(reviewImagesAPI) }

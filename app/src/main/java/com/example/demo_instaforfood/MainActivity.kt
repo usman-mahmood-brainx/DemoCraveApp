@@ -24,15 +24,17 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        tabSetup()
+
+
+    }
+
+    private fun tabSetup() {
         val adapter = ViewPagerAdapter(supportFragmentManager,lifecycle)
         binding.viewPager.adapter=adapter
+        binding.viewPager.isUserInputEnabled = false
         TabLayoutMediator(binding.tlTabs, binding.viewPager) { tab, position ->
             tab.text = tabsArray[position]
-       
         }.attach()
-
-        val displayMetrics = getResources().displayMetrics
-        val dpHeight = displayMetrics.heightPixels / displayMetrics.density
-        val dpWidth = displayMetrics.widthPixels / displayMetrics.density
     }
 }

@@ -3,7 +3,7 @@ package com.example.demo_instaforfood.Paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.demo_instaforfood.Api.ReviewImageAPI
-import com.example.demo_instaforfood.TempModels.Data
+import com.example.demo_instaforfood.TemporaryModels.Data
 
 
 class ReviewImagesPagingSource(private val reviewImagesApi: ReviewImageAPI):

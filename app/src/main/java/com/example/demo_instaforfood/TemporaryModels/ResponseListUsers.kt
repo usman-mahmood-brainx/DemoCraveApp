@@ -1,4 +1,4 @@
-package com.example.demo_instaforfood.TempModels
+package com.example.demo_instaforfood.TemporaryModels
 
 import com.google.gson.annotations.SerializedName
 

@@ -9,18 +9,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.demo_instaforfood.Models.MenuItemRating
 import com.example.demo_instaforfood.R
 
-class MenuRatingAdapter(private var ratingList: List<MenuItemRating>) : RecyclerView.Adapter<MenuRatingAdapter.ViewHolder>() {
+class MenuRatingAdapter(private var ratingList: List<MenuItemRating>) :
+    RecyclerView.Adapter<MenuRatingAdapter.ViewHolder>() {
 
-    fun setList(list : List<MenuItemRating>){
+    fun setList(list: List<MenuItemRating>) {
         ratingList = list
         notifyDataSetChanged()
     }
+
     // create new views
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         // inflates the card_view_design view
         // that is used to hold list item
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.menu_item_rating_layout, parent, false)
+            .inflate(R.layout.item_menu_rating, parent, false)
 
         return ViewHolder(view)
     }
@@ -35,13 +37,13 @@ class MenuRatingAdapter(private var ratingList: List<MenuItemRating>) : Recycler
 
         var maxRating = 250
         val mytotalrating = rating.totalRating
-        if(mytotalrating >= maxRating ){
+        if (mytotalrating >= maxRating) {
             maxRating = maxRating + 20
         }
         val progress = (mytotalrating.toDouble() / maxRating.toDouble() * 100).toInt()
 
         holder.progressBar.progress = progress
-        
+
     }
 
     // return the number of the items in the list
@@ -52,8 +54,8 @@ class MenuRatingAdapter(private var ratingList: List<MenuItemRating>) : Recycler
     // Holds the views for adding it to image and text
     class ViewHolder(RatingView: View) : RecyclerView.ViewHolder(RatingView) {
         val tvTitle: TextView = RatingView.findViewById(R.id.tvTitle)
-        val tvRating:TextView = RatingView.findViewById(R.id.tvTotalRating)
-        val progressBar:ProgressBar = RatingView.findViewById(R.id.progressBar)
+        val tvRating: TextView = RatingView.findViewById(R.id.tvTotalRating)
+        val progressBar: ProgressBar = RatingView.findViewById(R.id.progressBar)
 
 
     }

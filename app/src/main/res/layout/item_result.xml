@@ -4,31 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
-    >
-
+    android:padding="10dp">
 
     <ImageView
         android:id="@+id/ivFoodIconResult"
         android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@drawable/image_noodles"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.25"
-        android:scaleType="centerCrop"
-        android:src="@drawable/noodels"
-        />
+        app:layout_constraintWidth_percent="0.3" />
 
     <TextView
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:fontFamily="@font/roboto_regular"
         android:text="1. Mini Pancake"
-        android:layout_marginStart="10dp"
         android:textColor="@color/black"
-        android:textSize="15sp"
+        android:textSize="@dimen/medium_text_size"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/ivFoodIconResult"
         app:layout_constraintTop_toTopOf="parent" />
@@ -46,7 +43,7 @@
             android:layout_width="20dp"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/icecream_icon" />
+            app:srcCompat="@drawable/ic_icecream" />
 
         <TextView
             android:id="@+id/tvRatingPlace"
@@ -56,7 +53,8 @@
             android:layout_toRightOf="@+id/ivIcon"
             android:fontFamily="@font/roboto_regular"
             android:text="Rating 9.2"
-            android:textSize="14sp" />
+            android:textSize="@dimen/small_text_size" />
+
         <ImageView
             android:id="@+id/dotCircle1"
             android:layout_width="4dp"
@@ -64,7 +62,7 @@
             android:layout_centerVertical="true"
             android:layout_marginHorizontal="7dp"
             android:layout_toRightOf="@+id/tvRatingPlace"
-            android:background="@drawable/dot_circle" />
+            android:background="@drawable/shape_dot_circle_black" />
 
         <TextView
             android:id="@+id/tvTotalReviews"
@@ -73,7 +71,7 @@
             android:layout_toRightOf="@+id/dotCircle1"
             android:fontFamily="@font/roboto_regular"
             android:text="(112) Reviews"
-            android:textSize="14sp" />
+            android:textSize="@dimen/small_text_size" />
 
     </RelativeLayout>
 
@@ -81,23 +79,24 @@
         android:id="@+id/tvCafeName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:fontFamily="@font/roboto_regular"
         android:text="San Fancisco Restaurant"
         android:textColor="@color/black"
-        android:textSize="15sp"
+        android:textSize="@dimen/small_text_size"
         android:textStyle="bold"
-        android:layout_marginStart="10dp"
         app:layout_constraintStart_toEndOf="@+id/ivFoodIconResult"
         app:layout_constraintTop_toBottomOf="@+id/rlRate" />
 
     <TextView
         android:id="@+id/tvAddress"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="5dp"
         android:fontFamily="@font/roboto_regular"
         android:text="121 El Camino Real, San Francisco, CA"
-        android:textSize="14sp"
-        android:layout_marginStart="10dp"
+        android:textSize="@dimen/small_text_size"
         app:layout_constraintStart_toEndOf="@+id/ivFoodIconResult"
         app:layout_constraintTop_toBottomOf="@+id/tvCafeName" />
 
@@ -108,23 +107,23 @@
         android:layout_marginStart="10dp"
         app:layout_constraintStart_toEndOf="@+id/ivFoodIconResult"
         app:layout_constraintTop_toBottomOf="@+id/tvAddress">
+
         <ImageView
             android:id="@+id/ivMapIcon"
             android:layout_width="18dp"
             android:layout_height="match_parent"
-            app:srcCompat="@drawable/baseline_location_on_24" />
+            app:srcCompat="@drawable/ic_location" />
 
         <TextView
             android:id="@+id/tvDistance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
+            android:layout_toRightOf="@id/ivMapIcon"
             android:fontFamily="@font/roboto_light"
             android:text="0.2 mi"
             android:textColor="@color/black"
-            android:textSize="14sp"
-            android:layout_toRightOf="@id/ivMapIcon"
-            />
+            android:textSize="@dimen/small_text_size" />
 
         <ImageView
             android:id="@+id/dotCircle2"
@@ -133,16 +132,16 @@
             android:layout_centerVertical="true"
             android:layout_marginHorizontal="7dp"
             android:layout_toRightOf="@+id/tvDistance"
-            android:background="@drawable/dot_circle" />
+            android:background="@drawable/shape_dot_circle_black" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_toRightOf="@id/dotCircle2"
+            android:fontFamily="@font/roboto_condensed_regular"
             android:text="Open Now"
             android:textColor="@color/blue"
-            android:textSize="14sp"
-            android:layout_toRightOf="@id/dotCircle2"
-            android:fontFamily="@font/roboto_condensed_regular"/>
-
+            android:textSize="@dimen/small_text_size" />
 
     </RelativeLayout>
 
@@ -153,7 +152,6 @@
         android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bookmark_empty_ic" />
-
+        app:srcCompat="@drawable/ic_bookmark_empty" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

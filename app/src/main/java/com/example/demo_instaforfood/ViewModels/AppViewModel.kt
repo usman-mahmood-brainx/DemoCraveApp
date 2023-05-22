@@ -10,5 +10,4 @@ import javax.inject.Inject
 @HiltViewModel
 class AppViewModel @Inject constructor(private val repository: AppRepository) : ViewModel() {
     val list = repository.getImages().cachedIn(viewModelScope)
-
 }
