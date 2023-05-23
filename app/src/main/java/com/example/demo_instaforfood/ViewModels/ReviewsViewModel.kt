@@ -8,6 +8,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class AppViewModel @Inject constructor(private val repository: AppRepository) : ViewModel() {
+class ReviewsViewModel @Inject constructor(private val repository: AppRepository) : ViewModel() {
     val list = repository.getImages().cachedIn(viewModelScope)
 }

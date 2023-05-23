@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 
-interface ReviewImageAPI {
+interface ReviewImageApi {
     @GET("/api/users")
     suspend fun getAllUsers(@Query("page")page:Int): ResponseListUsers
 }

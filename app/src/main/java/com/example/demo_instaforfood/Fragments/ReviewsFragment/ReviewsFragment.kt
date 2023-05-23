@@ -10,14 +10,14 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.demo_instaforfood.Models.MenuItemRating
 import com.example.demo_instaforfood.Paging.ReveiwsImagesPagingAdapter
-import com.example.demo_instaforfood.ViewModels.AppViewModel
+import com.example.demo_instaforfood.ViewModels.ReviewsViewModel
 import com.example.demo_instaforfood.databinding.FragmentReviewsBinding
 
 
 class ReviewsFragment : Fragment() {
 
     lateinit var reviewsBinding: FragmentReviewsBinding
-    lateinit var appViewModel: AppViewModel
+    lateinit var appViewModel: ReviewsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +39,7 @@ class ReviewsFragment : Fragment() {
 
         val reveiwsImagesPagingAdapter = ReveiwsImagesPagingAdapter()
         ReviewImagesSetup(reveiwsImagesPagingAdapter)
-        appViewModel = ViewModelProvider(requireActivity()).get(AppViewModel::class.java)
+        appViewModel = ViewModelProvider(requireActivity()).get(ReviewsViewModel::class.java)
 
         
         appViewModel.list.observe(requireActivity(),{
