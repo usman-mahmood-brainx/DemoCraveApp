@@ -34,12 +34,6 @@ import java.net.URL
 
 class FileDownloadWorker(private val context:Context,private val workerParameters: WorkerParameters):Worker(context,workerParameters) {
 
-    private val notificationManager =
-        NotificationManagerCompat.from(applicationContext)
-    private val notificationBuilder =
-        NotificationCompat.Builder(applicationContext, CHANNEL_NAME)
-
-
     override fun doWork(): Result {
 
 
@@ -139,5 +133,5 @@ class FileDownloadWorker(private val context:Context,private val workerParameter
 
         notificationManager.notify(0, notificationBuilder.build())
     }
- 
+
 }
