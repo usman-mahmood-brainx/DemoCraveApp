@@ -11,7 +11,8 @@ private val tabsArray = arrayOf(
     "Reviews",
     "Map",
     "Category",
-    "Cities"
+    "Cities",
+    "Clients"
 )
 
 @AndroidEntryPoint
@@ -23,7 +24,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         tabSetup()
 
 

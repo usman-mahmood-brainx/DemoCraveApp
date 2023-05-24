@@ -22,8 +22,7 @@ import javax.inject.Inject
 class LoginActivity : AppCompatActivity() {
     lateinit var binding: ActivityLoginBinding
     lateinit var loginViewModel: LoginViewModel
-    @Inject
-    lateinit var sharedPreferencesHelper: SharedPreferencesHelper
+    @Inject lateinit var sharedPreferencesHelper: SharedPreferencesHelper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
