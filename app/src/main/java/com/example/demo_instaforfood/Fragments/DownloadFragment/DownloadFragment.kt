@@ -70,9 +70,13 @@ class DownloadFragment : Fragment() {
                 .setConstraints(constraints)
                 .setBackoffCriteria(BackoffPolicy.LINEAR,10,TimeUnit.SECONDS)
                 .setInputData(data.build())
+                .addTag("Downloading")
                 .build()
 
+
         workManager.enqueue(oneTimeWorkRequest)
+//        val worker = workManager.getWorkInfosByTag("Downloading")
+
 
         workManager.getWorkInfoByIdLiveData(oneTimeWorkRequest.id)
             .observe(viewLifecycleOwner, Observer { info ->
