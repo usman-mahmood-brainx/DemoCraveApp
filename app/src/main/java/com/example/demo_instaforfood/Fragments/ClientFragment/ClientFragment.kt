@@ -80,5 +80,11 @@ class ClientFragment : Fragment() {
         return binding.root
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        // Release any resources associated with the view here
+        searchJob?.cancel() // Cancel the ongoing search job, if any
+    }
+
 
 }

@@ -8,8 +8,9 @@ import com.example.demo_instaforfood.Fragments.CategoryFragment.CategoryFragment
 import com.example.demo_instaforfood.Fragments.ClientFragment.ClientFragment
 import com.example.demo_instaforfood.Fragments.MapFragment.MapFragment
 import com.example.demo_instaforfood.Fragments.ReviewsFragment.ReviewsFragment
+import com.example.demo_instaforfood.Fragments.DownloadFragment.DownloadFragment
 
-private val NUM_TABS = 5
+private val NUM_TABS = 6
 
 class ViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fragmentManager, lifecycle) {
@@ -19,14 +20,15 @@ class ViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     }
 
     override fun createFragment(position: Int): Fragment {
-        when (position) {
-            0 -> return ReviewsFragment()
-            1 -> return MapFragment()
-            2 -> return CategoryFragment()
-            3 -> return CategoryFragment()
-            4 -> return ClientFragment()
+        return when (position) {
+            0 -> ReviewsFragment()
+            1 -> MapFragment()
+            2 -> CategoryFragment()
+            3 -> CategoryFragment()
+            4 -> ClientFragment()
+            5 -> DownloadFragment()
+            else -> ReviewsFragment()
         }
-        return ReviewsFragment()
     }
 
     

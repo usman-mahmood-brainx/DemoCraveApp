@@ -2,6 +2,7 @@ package com.example.demo_instaforfood.Fragments.MapFragment
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
@@ -35,6 +36,7 @@ class MapFragment : Fragment() {
     private val  LOCATION_PERMISSION_REQUEST_CODE = 101
     private var locationPermission = MutableLiveData<Boolean>(false)
     private var marker: Marker? = null
+    private lateinit var context:Context
 
 
     @SuppressLint("PotentialBehaviorOverride")
@@ -42,11 +44,11 @@ class MapFragment : Fragment() {
 
 
         val boundsBuilder = LatLngBounds.Builder()
-        val iconGenerator = IconGenerator(requireContext())
+        val iconGenerator = IconGenerator(context)
         iconGenerator.setTextAppearance(R.style.myStyleTextMarker)
         iconGenerator.setBackground(
             ContextCompat.getDrawable(
-                requireContext(),
+                context,
                 R.drawable.ic_custom_marker
             )
         )
@@ -66,7 +68,7 @@ class MapFragment : Fragment() {
                 icon(BitmapDescriptorFactory.fromBitmap((iconGenerator.makeIcon(count.toString()))))
 
             })
-            googleMap.setInfoWindowAdapter(MyInfoWindowAdapter(requireContext()))
+            googleMap.setInfoWindowAdapter(MyInfoWindowAdapter(context))
 
         }
 
@@ -86,7 +88,7 @@ class MapFragment : Fragment() {
             true
         }
 
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
         if(checkPermission()) {
             locationPermission.postValue(true)
          }
@@ -101,6 +103,10 @@ class MapFragment : Fragment() {
     
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        context = requireContext()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -108,6 +114,7 @@ class MapFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentMapBinding.inflate(inflater)
+
 
         // Bottom Sheet Setup
         bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
@@ -125,7 +132,7 @@ class MapFragment : Fragment() {
 
         // Bottom Sheet Results
         val foodResultAdapter = FoodResultAdapter(emptyList())
-        binding.rvFoodResult.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvFoodResult.layoutManager = LinearLayoutManager(context)
         binding.rvFoodResult.adapter = foodResultAdapter
 
 
@@ -140,7 +147,7 @@ class MapFragment : Fragment() {
 
     private fun checkPermission():Boolean{
         return ContextCompat.checkSelfPermission(
-            requireContext(),
+            context,
             Manifest.permission.ACCESS_FINE_LOCATION
         ) == PackageManager.PERMISSION_GRANTED
     }
@@ -155,7 +162,7 @@ class MapFragment : Fragment() {
 
         // Get the last known location
         if (ContextCompat.checkSelfPermission(
-                requireContext(),
+                context,
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
         ) {
@@ -199,7 +206,7 @@ class MapFragment : Fragment() {
                     locationPermission.postValue(true)
                 }
                 else {
-                    Toast.makeText(requireContext(), "Please Give Location Persmission", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Please Give Location Persmission", Toast.LENGTH_SHORT).show()
                 }
             }
         }
