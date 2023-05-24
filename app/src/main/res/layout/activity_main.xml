@@ -15,18 +15,28 @@
         app:layout_constraintTop_toTopOf="parent"
         app:tabIndicatorColor="@color/black"
         app:tabIndicatorHeight="1dp"
-        app:tabMode="fixed"
+        app:tabMode="auto"
         app:tabSelectedTextColor="@color/black"
         app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
         app:tabTextColor="@color/grey" />
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPager"
+    <FrameLayout
+        android:id="@+id/appfragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tlTabs" />
+
+
+<!--    <androidx.viewpager2.widget.ViewPager2-->
+<!--        android:id="@+id/viewPager"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/tlTabs" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
