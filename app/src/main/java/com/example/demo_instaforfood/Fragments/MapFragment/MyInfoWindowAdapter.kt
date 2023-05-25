@@ -16,10 +16,6 @@ class MyInfoWindowAdapter(val mContext: Context) : GoogleMap.InfoWindowAdapter {
     private fun setInfoWindowText(marker: Marker) {
         val title = marker.title
         val tvTitle = mWindow.findViewById<TextView>(R.id.tvTitle)
-       
-
-
-
     }
 
     override fun getInfoWindow(p0: Marker): View {

@@ -15,10 +15,9 @@ import com.example.demo_instaforfood.TemporaryModels.Data
 class ReveiwsImagesPagingAdapter : PagingDataAdapter<Data, ReveiwsImagesPagingAdapter.ViewHolder>(COMPARATOR) {
 
     
-    // create new views
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        // inflates the card_view_design view
-        // that is used to hold list item
+
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_review, parent, false)
 
@@ -33,11 +32,9 @@ class ReveiwsImagesPagingAdapter : PagingDataAdapter<Data, ReveiwsImagesPagingAd
             .load(data?.avatar)
             .override(com.bumptech.glide.request.target.Target.SIZE_ORIGINAL)
             .into(holder.ivReview)
-//        holder.ivReview.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.noodels))
 
     }
 
-    // Holds the views for adding it to image and text
     class ViewHolder(ReviewView: View) : RecyclerView.ViewHolder(ReviewView) {
         val ivReview: ImageView = ReviewView.findViewById(R.id.ivReviewImage)
 

@@ -57,6 +57,7 @@ class CameraActivity : AppCompatActivity() {
 
         // Starting Camera Preview
         startCamera()
+
         // Button Listeners
         initListeners()
         
@@ -129,7 +130,6 @@ class CameraActivity : AppCompatActivity() {
 
             }
 
-
             // Save the image in the above file
             val outputFileOptions = ImageCapture.OutputFileOptions.Builder(
                 contentResolver,
@@ -137,20 +137,14 @@ class CameraActivity : AppCompatActivity() {
                 contentValues
             ).build()
 
-            /* pass in the details of where and how the image is taken.(arguments 1 and 2 of takePicture)
-            pass in the details of what to do after an image is taken.(argument 3 of takePicture) */
-
             it.takePicture(
                 outputFileOptions,
                 imgCaptureExecutor,
                 object : ImageCapture.OnImageSavedCallback {
                     override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                         Log.i("UsmanCode", "The image has been saved ")
-
 //                        val savedUri = outputFileResults.savedUri ?: Uri.fromFile(file)
 //                        val savedBitmap = BitmapFactory.decodeFile(file.absolutePath)
-
-
                     }
 
                     override fun onError(exception: ImageCaptureException) {
@@ -184,7 +178,6 @@ class CameraActivity : AppCompatActivity() {
         if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             permissionList.add(Manifest.permission.READ_EXTERNAL_STORAGE)
         }
-
 
         if (permissionList.size > 0) {
             requestPermissions(permissionList.toTypedArray(), 101)

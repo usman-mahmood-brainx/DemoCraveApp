@@ -19,7 +19,6 @@ class SharedPreferencesHelper(private val sharedPreferences: SharedPreferences) 
         editor.putString(UID, headers["uid"])
         editor.apply()
     }
-
     fun setloginStatus(loginStatus:Boolean){
         val editor = sharedPreferences.edit()
         editor.putBoolean(LOGIN_STATUS,loginStatus)

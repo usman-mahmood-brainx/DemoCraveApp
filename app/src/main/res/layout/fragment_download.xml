@@ -61,5 +61,15 @@
             android:layout_below="@+id/pbDownloading"
             android:layout_centerHorizontal="true"
             app:backgroundTint="@null" />
+        <Button
+            android:id="@+id/btnCamera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/shape_rounded_button"
+            android:text="Open Camera"
+            android:layout_below="@+id/btnDownload"
+            android:layout_centerHorizontal="true"
+            app:backgroundTint="@null" />
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

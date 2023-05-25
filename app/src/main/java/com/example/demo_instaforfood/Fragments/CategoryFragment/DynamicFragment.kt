@@ -15,7 +15,6 @@ class DynamicFragment : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             tabTitle = it.getString(ARG_TAB_TITLE)
-
         }
     }
 
@@ -25,9 +24,7 @@ class DynamicFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentDynamicBinding.inflate(inflater)
-        arguments?.let { args->
-           val tabTitle = args.getString(ARG_TAB_TITLE)
-        }
+
         val topRatedItemAdapter = TopRatedItemsAdapter(emptyList())
         binding.rvTopRated.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.rvTopRated.adapter = topRatedItemAdapter

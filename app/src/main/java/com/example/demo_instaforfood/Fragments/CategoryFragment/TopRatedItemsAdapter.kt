@@ -14,7 +14,6 @@ class TopRatedItemsAdapter(private var topRatedItemList: List<FoodResult>) : Rec
         topRatedItemList = list
         notifyDataSetChanged()
     }
-    // create new views
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_rated, parent, false)
@@ -22,18 +21,13 @@ class TopRatedItemsAdapter(private var topRatedItemList: List<FoodResult>) : Rec
         return ViewHolder(view)
     }
 
-    // binds the list items to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
-
     }
 
-    // return the number of the items in the list
     override fun getItemCount(): Int {
         return 8
     }
 
-    // Holds the views for adding it to image and text
     class ViewHolder(TopRatedItemsView: View) : RecyclerView.ViewHolder(TopRatedItemsView) {
         val tvName: TextView = TopRatedItemsView.findViewById(R.id.tvName)
         val tvRatingPlace: TextView = TopRatedItemsView.findViewById(R.id.tvRatingPlace)

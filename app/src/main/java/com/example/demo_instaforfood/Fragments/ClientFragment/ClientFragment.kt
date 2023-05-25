@@ -24,10 +24,9 @@ class ClientFragment : Fragment() {
 
     lateinit var binding: FragmentClientsBinding
     lateinit var clientViewModel: ClientsViewModel
-    @Inject
-    lateinit var sharedPreferencesHelper: SharedPreferencesHelper
-
+    @Inject lateinit var sharedPreferencesHelper: SharedPreferencesHelper
     private var searchJob: Job? = null
+    lateinit var clientAdapter:ClientAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -35,8 +34,14 @@ class ClientFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentClientsBinding.inflate(inflater)
 
+        clientListSetup()
+        searchBarSetup()
 
-        val clientAdapter = ClientAdapter(emptyList())
+        return binding.root
+    }
+
+    private fun clientListSetup() {
+        clientAdapter = ClientAdapter(emptyList())
         binding.rvClients.layoutManager = LinearLayoutManager(requireContext())
         binding.rvClients.adapter = clientAdapter
 
@@ -44,14 +49,16 @@ class ClientFragment : Fragment() {
         sharedPreferencesHelper.let {
             clientViewModel.getClientList(it.getAccessToken(), it.getClient(), it.getUid(),"")
         }
-        clientViewModel.clientList.observe(viewLifecycleOwner, Observer {
 
+        clientViewModel.clientList.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 binding.pbClients.visibility = View.GONE
                 clientAdapter.setList(it)
             }
         })
+    }
 
+    private fun searchBarSetup() {
         binding.etClientSearch.addTextChangedListener(object :TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
@@ -73,11 +80,6 @@ class ClientFragment : Fragment() {
             }
 
         })
-
-
-
-
-        return binding.root
     }
 
     override fun onDestroyView() {

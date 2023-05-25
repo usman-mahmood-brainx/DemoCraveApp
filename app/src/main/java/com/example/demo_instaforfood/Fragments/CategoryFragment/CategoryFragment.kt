@@ -21,8 +21,6 @@ import com.google.android.material.tabs.TabLayout
 class CategoryFragment : Fragment() {
 
     lateinit var binding: FragmentCategoryBinding
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -59,7 +57,6 @@ class CategoryFragment : Fragment() {
 
     private fun pieChartSetup(categoryList: List<Category>) {
 
-
         val sortedCategoryList = categoryList.sortedByDescending { it.totalReviws }
         var sum = 0
         val pieEntries = mutableListOf<PieEntry>()
@@ -94,9 +91,7 @@ class CategoryFragment : Fragment() {
 
     }
     private fun dynamicTabsSetup(categoryList: List<Category>) {
-//        val dynamicFragmentList = categoryList.map {
-//            DynamicFragment.newInstance(it.name,it.totalReviws)
-//        }
+
         val fragmentList = mutableListOf<DynamicFragment>()
         for (category in categoryList) {
             val tab = binding.tbItemList.newTab()

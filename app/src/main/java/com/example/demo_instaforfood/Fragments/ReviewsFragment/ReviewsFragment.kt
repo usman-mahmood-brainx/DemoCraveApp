@@ -26,7 +26,15 @@ class ReviewsFragment : Fragment() {
         // Inflate the layout for this fragment
         reviewsBinding = FragmentReviewsBinding.inflate(inflater)
 
-        val menuRatinglist = listOf(
+        MenuRatingsSetup()
+        ReviewImagesSetup()
+
+
+        return reviewsBinding.root
+    }
+
+    private fun MenuRatingsSetup() {
+        val menuRatingDummylist = listOf(
             MenuItemRating("+9",175),
             MenuItemRating("8",85),
             MenuItemRating("7",22),
@@ -34,29 +42,21 @@ class ReviewsFragment : Fragment() {
             MenuItemRating("1 to 5",24)
         )
 
-        val MenuRatingAdapter = MenuRatingAdapter(menuRatinglist)
-        MenuRatingsSetup(MenuRatingAdapter)
-
-        val reveiwsImagesPagingAdapter = ReveiwsImagesPagingAdapter()
-        ReviewImagesSetup(reveiwsImagesPagingAdapter)
-        appViewModel = ViewModelProvider(requireActivity()).get(ReviewsViewModel::class.java)
-
-        
-        appViewModel.list.observe(requireActivity(),{
-            reveiwsImagesPagingAdapter.submitData(lifecycle,it)
-        })
-
-        return reviewsBinding.root
-    }
-
-    private fun MenuRatingsSetup(MenuRatingAdapter: MenuRatingAdapter,) {
+        val MenuRatingAdapter = MenuRatingAdapter(menuRatingDummylist)
         reviewsBinding.rvMenuRatings.layoutManager = LinearLayoutManager(requireContext())
         reviewsBinding.rvMenuRatings.adapter = MenuRatingAdapter
     }
 
-    private fun ReviewImagesSetup(reveiwsImagesPagingAdapter: ReveiwsImagesPagingAdapter) {
+    private fun ReviewImagesSetup() {
+        val reveiwsImagesPagingAdapter = ReveiwsImagesPagingAdapter()
         reviewsBinding.rvReviewImages.layoutManager = GridLayoutManager(requireContext(),3)
         reviewsBinding.rvReviewImages.adapter = reveiwsImagesPagingAdapter
+
+        appViewModel = ViewModelProvider(requireActivity()).get(ReviewsViewModel::class.java)
+        appViewModel.list.observe(requireActivity(),{
+            reveiwsImagesPagingAdapter.submitData(lifecycle,it)
+        })
+
     }
 
 

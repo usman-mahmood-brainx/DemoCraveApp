@@ -14,17 +14,15 @@ class ClientAdapter(private var clientList: List<Client>) : RecyclerView.Adapter
         clientList = list
         notifyDataSetChanged()
     }
-    // create new views
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        // inflates the card_view_design view
-        // that is used to hold list item
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_client, parent, false)
 
         return ViewHolder(view)
     }
 
-    // binds the list items to a view
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
        val client = clientList[position]
@@ -37,8 +35,6 @@ class ClientAdapter(private var clientList: List<Client>) : RecyclerView.Adapter
         else{
             holder.tvPhoneNumber.text = ""
         }
-
-
     }
 
     // return the number of the items in the list
