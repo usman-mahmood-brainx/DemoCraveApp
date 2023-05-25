@@ -1,6 +1,8 @@
 package com.example.demo_instaforfood.Fragments.DownloadFragment
 
 import android.annotation.SuppressLint
+import android.app.NotificationManager
+import android.content.Context
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.net.toUri
 import androidx.lifecycle.Observer
 import androidx.work.*
@@ -18,6 +21,7 @@ import com.example.demo_instaforfood.Utils.Constants.KEY_FILE_NAME
 import com.example.demo_instaforfood.Utils.Constants.KEY_FILE_TYPE
 import com.example.demo_instaforfood.Utils.Constants.KEY_FILE_URI
 import com.example.demo_instaforfood.Utils.Constants.KEY_FILE_URL
+import java.util.UUID
 import java.util.concurrent.TimeUnit
 
 
@@ -25,20 +29,23 @@ class DownloadFragment : Fragment() {
 
     lateinit var workManager: WorkManager
     lateinit var binding: FragmentDownloadBinding
-    lateinit var notificationManager: NotificationManagerCompat
+    private var enquedRequestFlag = false
+    private val tag = "Downloading"
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentDownloadBinding.inflate(inflater)
-        return binding.root
-    }
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+        
         workManager = WorkManager.getInstance(requireContext())
-        notificationManager = NotificationManagerCompat.from(requireContext())
+
+        for(workInfo in workManager.getWorkInfosByTag(tag).get()){
+           if(workInfo?.state == WorkInfo.State.ENQUEUED || workInfo?.state == WorkInfo.State.RUNNING){
+               enquedRequestFlag = true
+               workerObserver(workInfo.id)
+           }
+        }
 
         val imageUrl = "https://images.pexels.com/photos/1402787/pexels-photo-1402787.jpeg"
         Glide.with(this).load(imageUrl).into(binding.ivUrlImage)
@@ -46,7 +53,15 @@ class DownloadFragment : Fragment() {
         binding.btnDownload.setOnClickListener {
             startDownloadingFile(imageUrl)
         }
+
+
+        return binding.root
+
+
     }
+
+
+
 
     @SuppressLint("MissingPermission")
     private fun startDownloadingFile(
@@ -68,48 +83,43 @@ class DownloadFragment : Fragment() {
         val oneTimeWorkRequest =
             OneTimeWorkRequest.Builder(FileDownloadWorker::class.java)
                 .setConstraints(constraints)
-                .setBackoffCriteria(BackoffPolicy.LINEAR,10,TimeUnit.SECONDS)
+                .setBackoffCriteria(BackoffPolicy.LINEAR, 10, TimeUnit.SECONDS)
                 .setInputData(data.build())
-                .addTag("Downloading")
+                .addTag(tag)
                 .build()
 
 
+
         workManager.enqueue(oneTimeWorkRequest)
+
 //        val worker = workManager.getWorkInfosByTag("Downloading")
 
+        workerObserver(oneTimeWorkRequest.id)
 
-        workManager.getWorkInfoByIdLiveData(oneTimeWorkRequest.id)
+    }
+
+    fun workerObserver(workerId:UUID){
+        workManager.getWorkInfoByIdLiveData(workerId)
             .observe(viewLifecycleOwner, Observer { info ->
                 info?.let {
                     when (it.state) {
                         WorkInfo.State.SUCCEEDED -> {
-                            val uri = it.outputData.getString(KEY_FILE_URI)
-                            
-                            Toast.makeText(
-                                requireContext(), "Downloading Completed", Toast.LENGTH_SHORT
-                            ).show()
-
-                            Toast.makeText(requireContext(), uri, Toast.LENGTH_SHORT).show()
-                            val imageUri = uri?.toUri()
-                            binding.ivUrlImage.setImageURI(imageUri)
-
-
+//                            val uri = it.outputData.getString(KEY_FILE_URI)?.toUri()
+                            enquedRequestFlag = false
+                            binding.tvProgress.text = "Download Completed"
                         }
                         WorkInfo.State.FAILED -> {
-
-                            Toast.makeText(
-                                requireContext(), "Downloading Failed", Toast.LENGTH_SHORT
-                            ).show()
+                            enquedRequestFlag = false
                         }
                         WorkInfo.State.ENQUEUED -> {
-                            Toast.makeText(
-                                requireContext(), "Downloading Started", Toast.LENGTH_SHORT
-                            ).show()
+                            enquedRequestFlag = true
                         }
                         WorkInfo.State.RUNNING -> {
-                            Toast.makeText(
-                                requireContext(), "Downloading In Progress", Toast.LENGTH_SHORT
-                            ).show()
+                            binding.tvProgress.visibility = View.VISIBLE
+                            binding.pbDownloading.visibility = View.VISIBLE
+                            val progress = it.progress.getInt("Progress",0)
+                            binding.tvProgress.text =  "${progress}%"
+                            binding.pbDownloading.progress = progress
                         }
                         else -> {
 

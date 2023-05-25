@@ -52,7 +52,6 @@ class ReviewsFragment : Fragment() {
     private fun MenuRatingsSetup(MenuRatingAdapter: MenuRatingAdapter,) {
         reviewsBinding.rvMenuRatings.layoutManager = LinearLayoutManager(requireContext())
         reviewsBinding.rvMenuRatings.adapter = MenuRatingAdapter
-
     }
 
     private fun ReviewImagesSetup(reveiwsImagesPagingAdapter: ReveiwsImagesPagingAdapter) {
