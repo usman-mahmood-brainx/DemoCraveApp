@@ -5,15 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CameraActivity"
-    android:paddingTop="30dp"
+    android:paddingTop="@dimen/padding_30"
     >
 
     <TextView
         android:id="@+id/tvCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:text="Cancel"
+        android:layout_marginStart="@dimen/margin_15"
+        android:text="@string/cancel"
         android:textColor="@color/black"
         android:textSize="@dimen/large_text_size"
         android:fontFamily="@font/roboto_regular"
@@ -24,7 +24,7 @@
         android:id="@+id/tvPhoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Photo"
+        android:text="photo"
         android:textColor="@color/black"
         android:textSize="@dimen/large_text_size"
         android:fontFamily="@font/roboto_regular"
@@ -36,8 +36,8 @@
         android:id="@+id/tvDone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="15dp"
-        android:text="Done"
+        android:layout_marginEnd="@dimen/margin_15"
+        android:text="@string/done"
         android:textColor="@color/black"
         android:textSize="@dimen/large_text_size"
         android:fontFamily="@font/roboto_regular"
@@ -46,10 +46,10 @@
 
     <androidx.camera.view.PreviewView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/zero"
         android:id="@+id/preview"
         app:layout_constraintHeight_percent="0.6"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/margin_20"
         app:layout_constraintTop_toBottomOf="@+id/tvPhoto"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
@@ -58,7 +58,7 @@
         android:id="@+id/ivSwitchCamera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="@dimen/margin_30"
         app:layout_constraintBottom_toTopOf="@id/tabLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/preview"
@@ -68,7 +68,7 @@
         android:id="@+id/ivFlash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="@dimen/margin_30"
         app:layout_constraintBottom_toTopOf="@id/tabLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/preview"
@@ -103,14 +103,14 @@
 
         <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/zero"
         android:layout_height="wrap_content"
         app:tabMode="fixed"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:tabIndicatorColor="@color/black"
-        app:tabIndicatorHeight="1dp"
+        app:tabIndicatorHeight="@dimen/tab_indicator_height"
         app:tabSelectedTextColor="@color/black"
         app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
         app:tabTextColor="@color/grey"
@@ -119,19 +119,19 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Library" />
+            android:text="@string/library" />
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Instagram" />
+            android:text="@string/instagram" />
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Video" />
+            android:text="@string/video" />
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Camera"
+            android:text="@string/camera"
             android:focusable="true"
 
             />

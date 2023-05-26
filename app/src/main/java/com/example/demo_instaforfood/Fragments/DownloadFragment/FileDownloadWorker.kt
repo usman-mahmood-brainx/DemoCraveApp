@@ -10,7 +10,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
-import android.util.Log
+
 import androidx.core.app.NotificationCompat
 import androidx.core.net.toUri
 import androidx.work.*
@@ -25,56 +25,67 @@ import java.io.FileOutputStream
 import java.net.HttpURLConnection
 import java.net.URL
 
-class FileDownloadWorker(private val context:Context,private val workerParameters: WorkerParameters):CoroutineWorker(context,workerParameters) {
+class FileDownloadWorker(
+    private val context: Context,
+    private val workerParameters: WorkerParameters,
+) : CoroutineWorker(context, workerParameters) {
 
-    companion object{
-        const val PROGRESS_NOTIFICATION_ID = 0
-        const val COMPLETE_NOTIFICATION_ID = 1
-        const val CHANNEL_ID = "download"
-        const val CHANNEL_NAME = "Download Channel"
-    }
-    lateinit var  notificationManager: NotificationManager
+
+    private val PROGRESS_NOTIFICATION_ID = 0
+    private val COMPLETE_NOTIFICATION_ID = 1
+    private val CHANNEL_ID = "download"
+    private val CHANNEL_NAME = "Download Channel"
+
+    lateinit var notificationManager: NotificationManager
 
 
     override suspend fun doWork(): Result {
         notificationManagerSetup()
 
-        val mimeType = when(workerParameters.inputData.getString(KEY_FILE_TYPE)){
+        val mimeType = when (workerParameters.inputData.getString(KEY_FILE_TYPE)) {
             "PDF" -> "application/pdf"
             "PNG" -> "image/png"
             "MP4" -> "video/mp4"
-            "JPEG"-> "image/jpeg"
+            "JPEG" -> "image/jpeg"
             else -> ""
         }
         val filename = workerParameters.inputData.getString(KEY_FILE_NAME)
         val url = workerParameters.inputData.getString(KEY_FILE_URL)
         url?.let {
             return try {
-                val uri = downloadFileFromUri(url,mimeType,filename )
+                val uri = downloadFileFromUri(url, mimeType, filename)
 
-                showCompletionNotification("Download Complete","File downloaded successfully")
+                showCompletionNotification("Download Complete", "File downloaded successfully")
                 Result.success(workDataOf(KEY_FILE_URI to uri.toString()))
             } catch (e: Exception) {
                 e.printStackTrace()
-                Log.d("UsmanError",e.message?:"e is null")
-                showCompletionNotification("Download Failed","Unable to Download File")
+                showCompletionNotification("Download Failed", "Unable to Download File")
                 Result.failure()
             }
 
         }
-        showCompletionNotification("Download Failed","Unable to Download File")
+        showCompletionNotification("Download Failed", "Unable to Download File")
         return Result.failure()
     }
 
     private fun notificationManagerSetup() {
-        notificationManager = applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager =
+            applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT)
+            val channel = NotificationChannel(
+                CHANNEL_ID,
+                CHANNEL_NAME,
+                NotificationManager.IMPORTANCE_DEFAULT
+            )
             notificationManager.createNotificationChannel(channel)
         }
     }
 
-    private suspend fun downloadFileFromUri(url: String, mimeType: String, filename: String?): Uri? {
+    private suspend fun downloadFileFromUri(
+        url: String,
+        mimeType: String,
+        filename: String?,
+    ): Uri? {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             val connection = URL(url).openConnection() as HttpURLConnection
             connection.requestMethod = "HEAD"
@@ -92,16 +103,15 @@ class FileDownloadWorker(private val context:Context,private val workerParameter
                 URL(url).openStream().use { input ->
                     resolver.openOutputStream(uri).use { output ->
                         val buffer = ByteArray(DEFAULT_BUFFER_SIZE)
-                        var bytesRead:Int
+                        var bytesRead: Int
                         var totalBytesRead = 0L
-                        while (input.read(buffer).also{bytesRead = it} != -1){
-                            output?.write(buffer,0,bytesRead)
+                        while (input.read(buffer).also { bytesRead = it } != -1) {
+                            output?.write(buffer, 0, bytesRead)
                             totalBytesRead += bytesRead
-                            val progress = ((totalBytesRead*100)/contentLength).toInt()
+                            val progress = ((totalBytesRead * 100) / contentLength).toInt()
                             setProgress(workDataOf("Progress" to progress))
                             setForegroundAsync(progressNotification(progress))
                         }
-//                        input.copyTo(output!!, DEFAULT_BUFFER_SIZE)
                     }
                 }
                 uri
@@ -123,7 +133,7 @@ class FileDownloadWorker(private val context:Context,private val workerParameter
         }
     }
 
-    private fun showCompletionNotification(title: String, text:String) {
+    private fun showCompletionNotification(title: String, text: String) {
         val notificationBuilder = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
             .setContentTitle(title)
             .setContentText(text)
@@ -136,7 +146,8 @@ class FileDownloadWorker(private val context:Context,private val workerParameter
             applicationContext,
             0,
             intent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
         notificationBuilder.setContentIntent(pendingIntent)
 
         notificationManager.cancel(PROGRESS_NOTIFICATION_ID)
@@ -156,7 +167,7 @@ class FileDownloadWorker(private val context:Context,private val workerParameter
             .setAutoCancel(true)
             .setProgress(100, progress, false)
 
-        val foregroundInfo = ForegroundInfo(PROGRESS_NOTIFICATION_ID,notificationBuilder.build())
+        val foregroundInfo = ForegroundInfo(PROGRESS_NOTIFICATION_ID, notificationBuilder.build())
         return foregroundInfo
     }
 

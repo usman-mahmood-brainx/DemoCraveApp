@@ -8,14 +8,14 @@
 
     <TextView
         android:id="@+id/tvLabelReviewByDish"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/zero"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginTop="@dimen/margin_15"
         android:fontFamily="@font/roboto_condensed_regular"
         android:text="Your Reviews By Dish"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="@dimen/label_text_size"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,10 +23,10 @@
 
     <RelativeLayout
         android:id="@+id/rlChart"
-        android:layout_width="0dp"
-        android:layout_height="250dp"
-        android:layout_marginTop="20dp"
-        android:padding="10dp"
+        android:layout_width="@dimen/zero"
+        android:layout_height="@dimen/piechart_height"
+        android:layout_marginTop="@dimen/margin_20"
+        android:padding="@dimen/paddin_10"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvLabelReviewByDish"
         app:layout_constraintWidth_percent="0.5">
@@ -42,8 +42,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="555"
-                android:textColor="#4E5961"
-                android:textSize="35sp"
+                android:textColor="@color/grey3"
+                android:textSize="@dimen/piechart_text_size"
                 android:textStyle="bold" />
 
     </RelativeLayout>
@@ -51,9 +51,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCategories"
         android:layout_width="0dp"
-        android:layout_height="250dp"
-        android:layout_marginTop="20dp"
-        android:paddingHorizontal="10dp"
+        android:layout_height="@dimen/piechart_height"
+        android:layout_marginTop="@dimen/margin_20"
+        android:paddingHorizontal="@dimen/paddin_10"
         app:layout_constraintStart_toEndOf="@+id/rlChart"
         app:layout_constraintTop_toBottomOf="@+id/tvLabelReviewByDish"
         app:layout_constraintWidth_percent="0.5"
@@ -65,7 +65,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/rvCategories"
         app:tabIndicatorColor="@color/black"
-        app:tabIndicatorHeight="1dp"
+        app:tabIndicatorHeight="@dimen/tab_indicator_height"
         app:tabMode="auto"
         app:tabSelectedTextColor="@color/black"
         app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
@@ -74,8 +74,8 @@
     <FrameLayout
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="@dimen/zero"
+        android:layout_marginTop="@dimen/margin_10"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tbItemList" />
 

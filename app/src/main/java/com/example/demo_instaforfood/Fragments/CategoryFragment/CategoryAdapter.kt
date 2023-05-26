@@ -27,13 +27,16 @@ class CategoryAdapter(private var categoryList: List<Category>) : RecyclerView.A
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val category = categoryList[position]
-        holder.tvCategoryName.text = category.name
-        val percentage = getPercentage(category.totalReviws)
-        holder.tvTotalReviews.text = "${category.totalReviws} / ${percentage}% "
-        
-        val dotColorDrawable = holder.ivDotColor.background
-        DrawableCompat.setTint(dotColorDrawable, category.color)
+        holder.apply {
+            val category = categoryList[position]
+            tvCategoryName.text = category.name
+            val percentage = getPercentage(category.totalReviws)
+            tvTotalReviews.text = "${category.totalReviws} / ${percentage}% "
+
+            val dotColorDrawable = holder.ivDotColor.background
+            DrawableCompat.setTint(dotColorDrawable, category.color)
+        }
+
     }
 
     private fun getPercentage(catReview:Int): Int {

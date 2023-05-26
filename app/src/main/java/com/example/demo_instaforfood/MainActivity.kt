@@ -29,7 +29,7 @@ private val tabsArray = arrayOf(
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    lateinit var binding : ActivityMainBinding
+    private lateinit var binding : ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,8 +49,6 @@ class MainActivity : AppCompatActivity() {
 
         val initialFragment = ReviewsFragment()
         replaceFragment(initialFragment)
-
-
 
         binding.tlTabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {

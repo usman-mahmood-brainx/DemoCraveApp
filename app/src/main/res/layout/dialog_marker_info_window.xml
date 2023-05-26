@@ -3,20 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="25dp"
-    app:cardElevation="3dp"
+    app:cardCornerRadius="@dimen/card_corner_radius"
+    app:cardElevation="@dimen/card_elevation"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="210dp"
+        android:layout_width="@dimen/card_width"
         android:layout_height="wrap_content"
-        android:paddingBottom="10dp"
+        android:paddingBottom="@dimen/paddin_10"
         >
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/ivFoodIcon"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="@dimen/zero"
             android:adjustViewBounds="true"
             android:src="@drawable/image_noodles"
             android:scaleType="fitXY"
@@ -32,8 +32,8 @@
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginStart="@dimen/margin_6"
+            android:layout_marginTop="@dimen/margin_6"
             android:fontFamily="@font/roboto_regular"
             android:text="1. Mini Pancake"
             android:textColor="@color/black"
@@ -45,15 +45,15 @@
         <RelativeLayout
             android:id="@+id/rlRate"
             android:layout_width="wrap_content"
-            android:layout_height="15dp"
+            android:layout_height="@dimen/rate_height"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvName">
 
             <ImageView
                 android:id="@+id/ivIcon"
-                android:layout_width="15dp"
+                android:layout_width="@dimen/rate_height"
                 android:layout_height="match_parent"
-                android:layout_marginStart="5dp"
+                android:layout_marginStart="@dimen/margin_6"
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/ic_icecream" />
 
@@ -61,11 +61,11 @@
                 android:id="@+id/tvRatingPlace"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginStart="5dp"
+                android:layout_marginStart="@dimen/margin_5"
                 android:layout_toRightOf="@+id/ivIcon"
                 android:fontFamily="@font/roboto_regular"
                 android:text="Rating 9.2"
-                android:textSize="12sp" />
+                android:textSize="@dimen/small_text_size" />
 
         </RelativeLayout>
 
@@ -73,10 +73,10 @@
             android:id="@+id/tvReviews"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="@dimen/margin_6"
             android:fontFamily="@font/roboto_regular"
             android:text="112 Reviews"
-            android:textSize="12sp"
+            android:textSize="@dimen/small_text_size"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rlRate" />
 
@@ -84,11 +84,11 @@
             android:id="@+id/tvCafeName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="@dimen/margin_6"
             android:fontFamily="@font/roboto_regular"
             android:text="San Fancisco Restaurant"
             android:textColor="@color/black"
-            android:textSize="12sp"
+            android:textSize="@dimen/small_text_size"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvReviews" />
@@ -97,7 +97,7 @@
             android:id="@+id/tvStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="@dimen/margin_6"
             android:fontFamily="@font/roboto_condensed_light"
             android:text="Open Now"
             android:textColor="@color/blue"
@@ -107,9 +107,9 @@
 
         <ImageView
             android:id="@+id/ivMapIcon"
-            android:layout_width="14dp"
-            android:layout_height="14dp"
-            android:layout_marginEnd="5dp"
+            android:layout_width="@dimen/location_icon_width_height"
+            android:layout_height="@dimen/location_icon_width_height"
+            android:layout_marginEnd="@dimen/margin_5"
             app:layout_constraintEnd_toStartOf="@+id/tvDistance"
             app:layout_constraintTop_toBottomOf="@+id/tvCafeName"
             app:srcCompat="@drawable/ic_location" />
@@ -118,7 +118,7 @@
             android:id="@+id/tvDistance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="@dimen/margin_10"
             android:fontFamily="@font/roboto_light"
             android:text="0.2 mi"
             android:textColor="@color/black"

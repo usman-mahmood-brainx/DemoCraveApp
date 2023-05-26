@@ -20,8 +20,8 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
-    lateinit var binding: ActivityLoginBinding
-    lateinit var loginViewModel: LoginViewModel
+    private lateinit var binding: ActivityLoginBinding
+    private lateinit var loginViewModel: LoginViewModel
     @Inject
     lateinit var sharedPreferencesHelper: SharedPreferencesHelper
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -26,8 +26,11 @@ class DynamicFragment : Fragment() {
         binding = FragmentDynamicBinding.inflate(inflater)
 
         val topRatedItemAdapter = TopRatedItemsAdapter(emptyList())
-        binding.rvTopRated.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.rvTopRated.adapter = topRatedItemAdapter
+        binding.rvTopRated.apply {
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            adapter = topRatedItemAdapter
+        }
+
 
         return binding.root
     }
@@ -37,9 +40,10 @@ class DynamicFragment : Fragment() {
         private const val ARG_TOTAL_REVIEWS = "totalReviews"
         fun newInstance(name:String,totalReviews:Int) : DynamicFragment {
             val fragment = DynamicFragment()
-            val args = Bundle()
-            args.putString(ARG_TAB_TITLE,name)
-            args.putInt(ARG_TOTAL_REVIEWS,totalReviews)
+            val args = Bundle().apply {
+                putString(ARG_TAB_TITLE,name)
+                putInt(ARG_TOTAL_REVIEWS,totalReviews)
+            }
             fragment.arguments = args
             return fragment
         }

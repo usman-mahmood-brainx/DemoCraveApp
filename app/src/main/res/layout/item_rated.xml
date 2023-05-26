@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingHorizontal="5dp"
-    android:paddingVertical="10dp">
+    android:paddingHorizontal="@dimen/paddin_5"
+    android:paddingVertical="@dimen/paddin_10">
 
     <ImageView
         android:id="@+id/ivFoodIconRated"
-        android:layout_width="160dp"
+        android:layout_width="@dimen/rated_food_image_width"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
         android:src="@drawable/image_dessert"
@@ -20,8 +20,8 @@
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="@dimen/margin_10"
+        android:layout_marginTop="@dimen/margin_10"
         android:fontFamily="@font/roboto_regular"
         android:text="1. Mini Pancake"
         android:textColor="@color/black"
@@ -49,7 +49,7 @@
             android:id="@+id/tvRatingPlace"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="@dimen/margin_5"
             android:layout_toRightOf="@+id/ivIcon"
             android:fontFamily="@font/roboto_regular"
             android:text="Rating 9.2"

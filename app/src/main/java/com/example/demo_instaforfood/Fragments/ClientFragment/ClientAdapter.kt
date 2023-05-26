@@ -27,13 +27,14 @@ class ClientAdapter(private var clientList: List<Client>) : RecyclerView.Adapter
 
        val client = clientList[position]
 
-        holder.tvName.text = client.name
-        holder.tvNameFirstLetter.text = client.name.get(0).toString()
-        if(client.client_phones.size>0) {
-            holder.tvPhoneNumber.text = client.client_phones[0].number
-        }
-        else{
-            holder.tvPhoneNumber.text = ""
+        holder.apply {
+            tvName.text = client.name
+            tvNameFirstLetter.text = client.name.get(0).toString()
+            if (client.client_phones.size > 0) {
+                tvPhoneNumber.text = client.client_phones[0].number
+            } else {
+                tvPhoneNumber.text = ""
+            }
         }
     }
 

@@ -31,14 +31,16 @@ import java.util.concurrent.Executors
 
 class CameraActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityCameraBinding
-
+    private lateinit var binding: ActivityCameraBinding
+    private lateinit var imgCaptureExecutor: ExecutorService
+    private lateinit var cameraControl: CameraControl
     private lateinit var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>
     private lateinit var cameraSelector: CameraSelector
+
     private var imageCapture: ImageCapture? = null
-    private lateinit var imgCaptureExecutor: ExecutorService
     private var flashFlag: Boolean = false
-    lateinit var cameraControl: CameraControl
+    private val PERMISSION_REQUEST_CODE = 101
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,19 +50,16 @@ class CameraActivity : AppCompatActivity() {
         val lastTabIndex = binding.tabLayout.tabCount - 1
         binding.tabLayout.getTabAt(lastTabIndex)?.select()
 
-        // Getting Permisiions
         getPermissions()
 
         cameraProviderFuture = ProcessCameraProvider.getInstance(this)
         cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
         imgCaptureExecutor = Executors.newSingleThreadExecutor()
 
-        // Starting Camera Preview
         startCamera()
 
-        // Button Listeners
-        initListeners()
-        
+        initListeners()  // Button Listeners
+
     }
 
     private fun initListeners() {
@@ -72,14 +71,13 @@ class CameraActivity : AppCompatActivity() {
         }
 
         binding.ivSwitchCamera.setOnClickListener {
-            cameraSelector = if(cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA){
+            cameraSelector = if (cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) {
                 CameraSelector.DEFAULT_FRONT_CAMERA
-            }else {
+            } else {
                 CameraSelector.DEFAULT_BACK_CAMERA
             }
             startCamera()
         }
-
 
         binding.ivFlash.setOnClickListener {
             flashFlag = !flashFlag
@@ -93,24 +91,27 @@ class CameraActivity : AppCompatActivity() {
         cameraProviderFuture.addListener({
             val cameraProvider = cameraProviderFuture.get()
 
-            // connecting a preview use case to the preview in the xml file.
             val preview = Preview.Builder().build().also {
                 it.setSurfaceProvider(binding.preview.surfaceProvider)
             }
             imageCapture = ImageCapture.Builder()
                 .setCaptureMode(ImageCapture.CAPTURE_MODE_MAXIMIZE_QUALITY)
                 .build()
+
             try {
-                // clear all the previous use cases first.
-                cameraProvider.unbindAll()
-                // binding the lifecycle of the camera to the lifecycle of the application.
-                val camera = cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture)
+                cameraProvider.unbindAll()   // clear all the previous use cases first.
+                val camera =
+                    cameraProvider.bindToLifecycle(
+                        this,
+                        cameraSelector,
+                        preview,
+                        imageCapture
+                    )  // binding the lifecycle of the camera to the lifecycle of the application.
 
                 cameraControl = camera.cameraControl
                 cameraControl.enableTorch(flashFlag)
 
             } catch (e: Exception) {
-                Log.d("UsmanCode", "Use case binding failed")
             }
 
         }, ContextCompat.getMainExecutor(this))
@@ -142,14 +143,16 @@ class CameraActivity : AppCompatActivity() {
                 imgCaptureExecutor,
                 object : ImageCapture.OnImageSavedCallback {
                     override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                        Log.i("UsmanCode", "The image has been saved ")
-//                        val savedUri = outputFileResults.savedUri ?: Uri.fromFile(file)
-//                        val savedBitmap = BitmapFactory.decodeFile(file.absolutePath)
+                        Toast.makeText(this@CameraActivity, "Image Saved", Toast.LENGTH_SHORT)
+                            .show()
                     }
 
                     override fun onError(exception: ImageCaptureException) {
-
-                        Log.d("UsmanCode", "Error taking photo:$exception")
+                        Toast.makeText(
+                            this@CameraActivity,
+                            "Unable to Save Image",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
 
                 })
@@ -158,12 +161,15 @@ class CameraActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.M)
     private fun animateFlash() {
-        binding.root.postDelayed({
-            binding.root.foreground = ColorDrawable(Color.WHITE)
-            binding.root.postDelayed({
-                binding.root.foreground = null
-            }, 50)
-        }, 100)
+        binding.apply {
+            root.postDelayed({
+                root.foreground = ColorDrawable(Color.WHITE)
+                root.postDelayed({
+                    root.foreground = null
+                }, 50)
+            }, 100)
+        }
+
     }
 
     private fun getPermissions() {
@@ -180,7 +186,7 @@ class CameraActivity : AppCompatActivity() {
         }
 
         if (permissionList.size > 0) {
-            requestPermissions(permissionList.toTypedArray(), 101)
+            requestPermissions(permissionList.toTypedArray(), PERMISSION_REQUEST_CODE)
         }
     }
 

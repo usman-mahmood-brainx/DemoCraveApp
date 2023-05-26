@@ -21,6 +21,11 @@ import com.google.android.material.tabs.TabLayout
 class CategoryFragment : Fragment() {
 
     lateinit var binding: FragmentCategoryBinding
+
+    private val INITIAL_FRAGMENT_INDEX = 0
+    private val SLICE_SPACE = 1f
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -28,7 +33,17 @@ class CategoryFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentCategoryBinding.inflate(inflater)
 
-        val categoryList = listOf(
+        val categoryList = dummylist()
+        pieChartSetup(categoryList)
+        reviewsListSetup(categoryList)
+        dynamicTabsSetup(categoryList)
+
+        return binding.root
+
+    }
+
+    private fun dummylist(): List<Category> {
+        return listOf(
             Category("Brunch", 460, ContextCompat.getColor(requireContext(), R.color.brunch)),
             Category("Burgers", 61, ContextCompat.getColor(requireContext(), R.color.burgers)),
             Category("Pizza", 46, ContextCompat.getColor(requireContext(), R.color.pizza)),
@@ -38,21 +53,16 @@ class CategoryFragment : Fragment() {
             Category("Coffee", 13, ContextCompat.getColor(requireContext(), R.color.coffe)),
             Category("Bar", 10, ContextCompat.getColor(requireContext(), R.color.bar))
         )
-
-        pieChartSetup(categoryList)
-        reviewsListSetup(categoryList)
-        dynamicTabsSetup(categoryList)
-
-        return binding.root
-
     }
 
 
     private fun reviewsListSetup(categoryList: List<Category>) {
         val categoryAdapter = CategoryAdapter(categoryList)
-        binding.rvCategories.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvCategories.adapter = categoryAdapter
-        binding.rvCategories.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        binding.apply {
+            rvCategories.layoutManager = LinearLayoutManager(requireContext())
+            rvCategories.adapter = categoryAdapter
+            rvCategories.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        }
     }
 
     private fun pieChartSetup(categoryList: List<Category>) {
@@ -60,36 +70,40 @@ class CategoryFragment : Fragment() {
         val sortedCategoryList = categoryList.sortedByDescending { it.totalReviws }
         var sum = 0
         val pieEntries = mutableListOf<PieEntry>()
-        val colors = mutableListOf<Int>()
+        val colorList = mutableListOf<Int>()
 
         for (category in sortedCategoryList) {
             pieEntries.add(PieEntry(category.totalReviws.toFloat(), category.name))
-            colors.add(category.color)
+            colorList.add(category.color)
             sum += category.totalReviws
         }
 
-        val dataSet = PieDataSet(pieEntries, "")
-        dataSet.colors = colors
-        dataSet.sliceSpace = 1f
+        val dataSet = PieDataSet(pieEntries, "").apply {
+            colors = colorList
+            sliceSpace = SLICE_SPACE
+        }
 
-        val data = PieData(dataSet)
-        data.setValueTextSize(0f)
-        data.setValueTextColor(Color.WHITE)
+        val piedata = PieData(dataSet).apply {
+            setValueTextSize(0f)
+            setValueTextColor(Color.WHITE)
+        }
 
-        binding.pieChart.data = data
-        binding.pieChart.description.isEnabled = false
-        binding.pieChart.setDrawEntryLabels(false)
-        binding.pieChart.legend.isEnabled = false
-        binding.pieChart.isRotationEnabled = false
-        binding.pieChart.setTouchEnabled(false)
-        binding.pieChart.setHoleRadius(75f)
-
-        binding.pieChart.animateY(1000, Easing.EaseInOutQuad)
-        binding.pieChart.invalidate()
+        binding.pieChart.apply {
+            data = piedata
+            description.isEnabled = false
+            setDrawEntryLabels(false)
+            legend.isEnabled = false
+            isRotationEnabled = false
+            setTouchEnabled(false)
+            setHoleRadius(75f)
+            animateY(1000, Easing.EaseInOutQuad)
+            invalidate()
+        }
 
         binding.tvSum.text = "$sum"
 
     }
+
     private fun dynamicTabsSetup(categoryList: List<Category>) {
 
         val fragmentList = mutableListOf<DynamicFragment>()
@@ -106,14 +120,13 @@ class CategoryFragment : Fragment() {
                 val selectedFragment = fragmentList[tab.position]
                 replaceFragment(selectedFragment)
             }
-
             override fun onTabUnselected(tab: TabLayout.Tab) {
             }
             override fun onTabReselected(tab: TabLayout.Tab) {
             }
         })
 
-        val initialFragment = fragmentList[0]
+        val initialFragment = fragmentList[INITIAL_FRAGMENT_INDEX]
         replaceFragment(initialFragment)
 
     }
@@ -123,7 +136,7 @@ class CategoryFragment : Fragment() {
             .replace(R.id.fragmentContainer, fragment)
             .commit()
     }
-    
+
 
 
 }

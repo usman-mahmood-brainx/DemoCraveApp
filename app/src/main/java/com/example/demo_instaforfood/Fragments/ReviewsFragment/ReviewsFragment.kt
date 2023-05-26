@@ -16,8 +16,8 @@ import com.example.demo_instaforfood.databinding.FragmentReviewsBinding
 
 class ReviewsFragment : Fragment() {
 
-    lateinit var reviewsBinding: FragmentReviewsBinding
-    lateinit var appViewModel: ReviewsViewModel
+    private lateinit var reviewsBinding: FragmentReviewsBinding
+    private lateinit var appViewModel: ReviewsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,23 +34,31 @@ class ReviewsFragment : Fragment() {
     }
 
     private fun MenuRatingsSetup() {
-        val menuRatingDummylist = listOf(
+        val menuRatinglist = dummyMenuRatingList()
+
+        val MenuRatingAdapter = MenuRatingAdapter(menuRatinglist)
+        reviewsBinding.rvMenuRatings.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = MenuRatingAdapter
+        }
+    }
+
+    private fun dummyMenuRatingList(): List<MenuItemRating> {
+        return listOf(
             MenuItemRating("+9",175),
             MenuItemRating("8",85),
             MenuItemRating("7",22),
             MenuItemRating("6",34),
             MenuItemRating("1 to 5",24)
         )
-
-        val MenuRatingAdapter = MenuRatingAdapter(menuRatingDummylist)
-        reviewsBinding.rvMenuRatings.layoutManager = LinearLayoutManager(requireContext())
-        reviewsBinding.rvMenuRatings.adapter = MenuRatingAdapter
     }
 
     private fun ReviewImagesSetup() {
         val reveiwsImagesPagingAdapter = ReveiwsImagesPagingAdapter()
-        reviewsBinding.rvReviewImages.layoutManager = GridLayoutManager(requireContext(),3)
-        reviewsBinding.rvReviewImages.adapter = reveiwsImagesPagingAdapter
+        reviewsBinding.rvReviewImages.apply {
+            layoutManager = GridLayoutManager(requireContext(),3)
+            adapter = reveiwsImagesPagingAdapter
+        }
 
         appViewModel = ViewModelProvider(requireActivity()).get(ReviewsViewModel::class.java)
         appViewModel.list.observe(requireActivity(),{

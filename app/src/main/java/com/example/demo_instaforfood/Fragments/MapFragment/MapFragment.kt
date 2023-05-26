@@ -53,10 +53,7 @@ class MapFragment : Fragment() {
             )
         )
 
-        val placesList = listOf(
-            Place("Johny and Jugnu", "Fast Food Chain", 31.27, 74.17),
-            Place("Villa", "Restaurant", 31.516, 74.352)
-        )
+        val placesList = dummyPlaceList()
 
         var count = 0
         for (place in placesList) {
@@ -103,6 +100,13 @@ class MapFragment : Fragment() {
     
     }
 
+    private fun dummyPlaceList(): List<Place> {
+        return listOf(
+            Place("Johny and Jugnu", "Fast Food Chain", 31.27, 74.17),
+            Place("Villa", "Restaurant", 31.516, 74.352)
+        )
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         context = requireContext()
@@ -118,8 +122,11 @@ class MapFragment : Fragment() {
 
         // Bottom Sheet Setup
         bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
-        bottomSheetBehavior.isFitToContents = false
-        bottomSheetBehavior.halfExpandedRatio = 0.6f
+        bottomSheetBehavior.apply {
+            isFitToContents = false
+            halfExpandedRatio = 0.6f
+        }
+
         binding.ivMinimize.setOnClickListener {
 
             if (bottomSheetBehavior.state != BottomSheetBehavior.STATE_HALF_EXPANDED) {
@@ -132,9 +139,10 @@ class MapFragment : Fragment() {
 
         // Bottom Sheet Results
         val foodResultAdapter = FoodResultAdapter(emptyList())
-        binding.rvFoodResult.layoutManager = LinearLayoutManager(context)
-        binding.rvFoodResult.adapter = foodResultAdapter
-
+        binding.rvFoodResult.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = foodResultAdapter
+        }
 
         return binding.root
     }
@@ -202,7 +210,6 @@ class MapFragment : Fragment() {
         when(requestCode){
             LOCATION_PERMISSION_REQUEST_CODE -> {
                 if(grantResults.isNotEmpty() && grantResults[0] === PackageManager.PERMISSION_GRANTED){
-
                     locationPermission.postValue(true)
                 }
                 else {

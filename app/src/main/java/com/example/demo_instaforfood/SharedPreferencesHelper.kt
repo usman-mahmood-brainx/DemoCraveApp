@@ -14,15 +14,22 @@ class SharedPreferencesHelper(private val sharedPreferences: SharedPreferences) 
 
     fun saveHeaders(headers: Headers) {
         val editor = sharedPreferences.edit()
-        editor.putString(ACCESS_TOKEN, headers["access-token"])
-        editor.putString(CLIENT, headers["client"])
-        editor.putString(UID, headers["uid"])
-        editor.apply()
+
+        editor.apply {
+            putString(ACCESS_TOKEN, headers[ACCESS_TOKEN])
+            putString(CLIENT, headers[CLIENT])
+            putString(UID, headers[UID])
+            apply()
+        }
+
     }
     fun setloginStatus(loginStatus:Boolean){
         val editor = sharedPreferences.edit()
-        editor.putBoolean(LOGIN_STATUS,loginStatus)
-        editor.apply()
+        editor.apply {
+            putBoolean(LOGIN_STATUS,loginStatus)
+            apply()
+        }
+
     }
 
     fun getLoginStatus():Boolean{

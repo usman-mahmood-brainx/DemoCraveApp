@@ -23,10 +23,10 @@ import javax.inject.Inject
 class ClientFragment : Fragment() {
 
     lateinit var binding: FragmentClientsBinding
-    lateinit var clientViewModel: ClientsViewModel
+    private lateinit var clientViewModel: ClientsViewModel
     @Inject lateinit var sharedPreferencesHelper: SharedPreferencesHelper
     private var searchJob: Job? = null
-    lateinit var clientAdapter:ClientAdapter
+    private lateinit var clientAdapter:ClientAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -42,8 +42,10 @@ class ClientFragment : Fragment() {
 
     private fun clientListSetup() {
         clientAdapter = ClientAdapter(emptyList())
-        binding.rvClients.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvClients.adapter = clientAdapter
+        binding.rvClients.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = clientAdapter
+        }
 
         clientViewModel = ViewModelProvider(requireActivity()).get(ClientsViewModel::class.java)
         sharedPreferencesHelper.let {

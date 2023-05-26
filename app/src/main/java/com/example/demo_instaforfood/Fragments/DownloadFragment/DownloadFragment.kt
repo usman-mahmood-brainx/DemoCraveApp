@@ -26,8 +26,9 @@ import java.util.concurrent.TimeUnit
 
 class DownloadFragment : Fragment() {
 
-    lateinit var workManager: WorkManager
-    lateinit var binding: FragmentDownloadBinding
+
+    private lateinit var binding: FragmentDownloadBinding
+    private lateinit var workManager: WorkManager
     private var enquedRequestFlag = false
     private val tag = "Downloading"
     private  val imageUrl = "https://images.pexels.com/photos/1402787/pexels-photo-1402787.jpeg"
@@ -118,11 +119,14 @@ class DownloadFragment : Fragment() {
                             enquedRequestFlag = true
                         }
                         WorkInfo.State.RUNNING -> {
-                            binding.tvProgress.visibility = View.VISIBLE
-                            binding.pbDownloading.visibility = View.VISIBLE
-                            val progress = it.progress.getInt("Progress",0)
-                            binding.tvProgress.text =  "${progress}%"
-                            binding.pbDownloading.progress = progress
+                            binding.apply {
+                                tvProgress.visibility = View.VISIBLE
+                                pbDownloading.visibility = View.VISIBLE
+                                val progress = it.progress.getInt("Progress",0)
+                                tvProgress.text =  "${progress}%"
+                                pbDownloading.progress = progress
+                            }
+
                         }
                         else -> {
 
