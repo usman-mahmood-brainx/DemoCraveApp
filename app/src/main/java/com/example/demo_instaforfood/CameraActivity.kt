@@ -128,12 +128,12 @@ class CameraActivity : AppCompatActivity() {
             }
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                contentValues.put(                                      
+                contentValues.put(
                     MediaStore.Images.Media.RELATIVE_PATH,
                     Environment.DIRECTORY_PICTURES + File.separator + "Test Storage"
                 )
             }
-            
+
             // Save the image in the above file
             val outputFileOptions = ImageCapture.OutputFileOptions.Builder(
                 contentResolver,
@@ -146,16 +146,21 @@ class CameraActivity : AppCompatActivity() {
                 imgCaptureExecutor,
                 object : ImageCapture.OnImageSavedCallback {
                     override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                        Toast.makeText(this@CameraActivity, "Image Saved", Toast.LENGTH_SHORT)
-                            .show()
+                        runOnUiThread {
+                            Toast.makeText(this@CameraActivity, "Image Saved", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+
                     }
 
                     override fun onError(exception: ImageCaptureException) {
-                        Toast.makeText(
-                            this@CameraActivity,
-                            "Unable to Save Image",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        runOnUiThread {
+                            Toast.makeText(
+                                this@CameraActivity,
+                                "Unable to Save Image",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
 
                 })
