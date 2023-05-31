@@ -22,13 +22,15 @@ import com.example.demo_instaforfood.Utils.Constants.KEY_FILE_URI
 import com.example.demo_instaforfood.Utils.Constants.KEY_FILE_URL
 import java.io.File
 import java.io.FileOutputStream
+import java.io.InputStream
+import java.io.OutputStream
 import java.net.HttpURLConnection
 import java.net.URL
 
 class FileDownloadWorker(
     private val context: Context,
     private val workerParameters: WorkerParameters,
-) : CoroutineWorker(context, workerParameters) {
+) : Worker(context, workerParameters) {
 
 
     private val PROGRESS_NOTIFICATION_ID = 0
@@ -39,7 +41,7 @@ class FileDownloadWorker(
     lateinit var notificationManager: NotificationManager
 
 
-    override suspend fun doWork(): Result {
+    override fun doWork(): Result {
         notificationManagerSetup()
 
         val mimeType = when (workerParameters.inputData.getString(KEY_FILE_TYPE)) {
@@ -81,15 +83,15 @@ class FileDownloadWorker(
         }
     }
 
-    private suspend fun downloadFileFromUri(
+    private fun downloadFileFromUri(
         url: String,
         mimeType: String,
         filename: String?,
     ): Uri? {
+        val connection = URL(url).openConnection() as HttpURLConnection
+        connection.requestMethod = "HEAD"
+        val contentLength = connection.contentLength.toLong()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            val connection = URL(url).openConnection() as HttpURLConnection
-            connection.requestMethod = "HEAD"
-            val contentLength = connection.contentLength.toLong()
 
             val contentValues = ContentValues().apply {
                 put(MediaStore.MediaColumns.DISPLAY_NAME, filename)
@@ -102,14 +104,8 @@ class FileDownloadWorker(
             return if (uri != null) {
                 URL(url).openStream().use { input ->
                     resolver.openOutputStream(uri).use { output ->
-                        val buffer = ByteArray(DEFAULT_BUFFER_SIZE)
-                        var bytesRead: Int
-                        var totalBytesRead = 0L
-                        while (input.read(buffer).also { bytesRead = it } != -1) {
-                            output?.write(buffer, 0, bytesRead)
-                            totalBytesRead += bytesRead
-                            val progress = ((totalBytesRead * 100) / contentLength).toInt()
-                            setProgress(workDataOf("Progress" to progress))
+                        downloadFileWithProgress(input, output, contentLength) { progress ->
+                            setProgressAsync(workDataOf("Progress" to progress))
                             setForegroundAsync(progressNotification(progress))
                         }
                     }
@@ -126,10 +122,30 @@ class FileDownloadWorker(
             )
             URL(url).openStream().use { input ->
                 FileOutputStream(target).use { output ->
-                    input.copyTo(output)
+                    downloadFileWithProgress(input, output, contentLength) { progress ->
+                        setProgressAsync(workDataOf("Progress" to progress))
+                        setForegroundAsync(progressNotification(progress))
+                    }
                 }
             }
             return target.toUri()
+        }
+    }
+
+    private fun downloadFileWithProgress(
+        inputStream: InputStream,
+        outputStream: OutputStream?,
+        contentLength: Long,
+        progressCallback: (Int) -> Unit,
+    ) {
+        val buffer = ByteArray(DEFAULT_BUFFER_SIZE)
+        var bytesRead: Int
+        var totalBytesRead = 0L
+        while (inputStream.read(buffer).also { bytesRead = it } != -1) {
+            outputStream?.write(buffer, 0, bytesRead)
+            totalBytesRead += bytesRead
+            val progress = ((totalBytesRead * 100) / contentLength).toInt()
+            progressCallback(progress)
         }
     }
 

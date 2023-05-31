@@ -124,13 +124,16 @@ class CameraActivity : AppCompatActivity() {
             val contentValues = ContentValues().apply {
                 put(MediaStore.Images.Media.DISPLAY_NAME, "$fileName.png")
                 put(MediaStore.Images.Media.MIME_TYPE, "image/png")
-                put(
-                    MediaStore.Images.Media.RELATIVE_PATH,
-                    Environment.DIRECTORY_PICTURES + File.separator + "Test Storage"
-                )
 
             }
 
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                contentValues.put(                                      
+                    MediaStore.Images.Media.RELATIVE_PATH,
+                    Environment.DIRECTORY_PICTURES + File.separator + "Test Storage"
+                )
+            }
+            
             // Save the image in the above file
             val outputFileOptions = ImageCapture.OutputFileOptions.Builder(
                 contentResolver,
@@ -159,7 +162,6 @@ class CameraActivity : AppCompatActivity() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     private fun animateFlash() {
         binding.apply {
             root.postDelayed({
@@ -185,7 +187,7 @@ class CameraActivity : AppCompatActivity() {
             permissionList.add(Manifest.permission.READ_EXTERNAL_STORAGE)
         }
 
-        if (permissionList.size > 0) {
+        if (permissionList.isNotEmpty()) {
             requestPermissions(permissionList.toTypedArray(), PERMISSION_REQUEST_CODE)
         }
     }
