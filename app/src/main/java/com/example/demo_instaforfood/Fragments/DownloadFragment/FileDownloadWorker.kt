@@ -1,6 +1,7 @@
 package com.example.demo_instaforfood.Fragments.DownloadFragment
 
 import android.app.NotificationChannel
+import android.app.NotificationChannelGroup
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.ContentValues
@@ -79,6 +80,11 @@ class FileDownloadWorker(
                 CHANNEL_NAME,
                 NotificationManager.IMPORTANCE_DEFAULT
             )
+            val channelGroupId = "personal"
+            val channelGroup = NotificationChannelGroup(channelGroupId,"Personal")
+            channel.group=channelGroupId
+            
+            notificationManager.createNotificationChannelGroup(channelGroup)
             notificationManager.createNotificationChannel(channel)
         }
     }
