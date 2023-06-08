@@ -13,4 +13,6 @@ object Constants {
     const val KEY_FILE_URI = "file_uri"
     const val KEY_FILE_URL = "file_url"
 
+    const val ZERO = 0
+
 }

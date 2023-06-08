@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.demo_instaforfood.Models.MenuItemRating
 import com.example.demo_instaforfood.Paging.ReveiwsImagesPagingAdapter
 import com.example.demo_instaforfood.ViewModels.ReviewsViewModel
 import com.example.demo_instaforfood.databinding.FragmentReviewsBinding
@@ -17,7 +16,7 @@ import com.example.demo_instaforfood.databinding.FragmentReviewsBinding
 class ReviewsFragment : Fragment() {
 
     private lateinit var reviewsBinding: FragmentReviewsBinding
-    private lateinit var appViewModel: ReviewsViewModel
+    private lateinit var reviewsViewModel: ReviewsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,6 +24,7 @@ class ReviewsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         reviewsBinding = FragmentReviewsBinding.inflate(inflater)
+        reviewsViewModel = ViewModelProvider(requireActivity()).get(ReviewsViewModel::class.java)
 
         MenuRatingsSetup()
         ReviewImagesSetup()
@@ -34,23 +34,16 @@ class ReviewsFragment : Fragment() {
     }
 
     private fun MenuRatingsSetup() {
-        val menuRatinglist = dummyMenuRatingList()
 
-        val MenuRatingAdapter = MenuRatingAdapter(menuRatinglist)
+        val menuRatingAdapter = MenuRatingAdapter(emptyList())
         reviewsBinding.rvMenuRatings.apply {
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = MenuRatingAdapter
+            adapter = menuRatingAdapter
         }
-    }
 
-    private fun dummyMenuRatingList(): List<MenuItemRating> {
-        return listOf(
-            MenuItemRating("+9",175),
-            MenuItemRating("8",85),
-            MenuItemRating("7",22),
-            MenuItemRating("6",34),
-            MenuItemRating("1 to 5",24)
-        )
+        reviewsViewModel.menuRatingList.observe(requireActivity(),{
+            menuRatingAdapter.setList(it)
+        })
     }
 
     private fun ReviewImagesSetup() {
@@ -60,8 +53,7 @@ class ReviewsFragment : Fragment() {
             adapter = reveiwsImagesPagingAdapter
         }
 
-        appViewModel = ViewModelProvider(requireActivity()).get(ReviewsViewModel::class.java)
-        appViewModel.list.observe(requireActivity(),{
+        reviewsViewModel.imagesList.observe(requireActivity(),{
             reveiwsImagesPagingAdapter.submitData(lifecycle,it)
         })
 

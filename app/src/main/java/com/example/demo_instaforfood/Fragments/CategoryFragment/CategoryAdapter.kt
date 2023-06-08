@@ -1,5 +1,6 @@
 package com.example.demo_instaforfood.Fragments.CategoryFragment
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,7 +35,7 @@ class CategoryAdapter(private var categoryList: List<Category>) : RecyclerView.A
             tvTotalReviews.text = "${category.totalReviws} / ${percentage}% "
 
             val dotColorDrawable = holder.ivDotColor.background
-            DrawableCompat.setTint(dotColorDrawable, category.color)
+            DrawableCompat.setTint(dotColorDrawable,Color.parseColor(category.color))
         }
 
     }

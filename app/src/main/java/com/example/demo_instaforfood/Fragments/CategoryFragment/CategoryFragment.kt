@@ -8,9 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.demo_instaforfood.Models.Category
 import com.example.demo_instaforfood.R
+import com.example.demo_instaforfood.Utils.Constants.ZERO
+import com.example.demo_instaforfood.ViewModels.CategoriesViewModel
+import com.example.demo_instaforfood.ViewModels.ReviewsViewModel
 import com.example.demo_instaforfood.databinding.FragmentCategoryBinding
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.data.PieData
@@ -21,8 +25,9 @@ import com.google.android.material.tabs.TabLayout
 class CategoryFragment : Fragment() {
 
     lateinit var binding: FragmentCategoryBinding
+    lateinit var categoriesViewModel: CategoriesViewModel
 
-    private val INITIAL_FRAGMENT_INDEX = 0
+    private val INITIAL_FRAGMENT_INDEX = ZERO
     private val SLICE_SPACE = 1f
 
 
@@ -32,29 +37,18 @@ class CategoryFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentCategoryBinding.inflate(inflater)
+        categoriesViewModel = ViewModelProvider(requireActivity()).get(CategoriesViewModel::class.java)
 
-        val categoryList = dummylist()
-        pieChartSetup(categoryList)
-        reviewsListSetup(categoryList)
-        dynamicTabsSetup(categoryList)
+       categoriesViewModel.categoryList.observe(requireActivity(),{categoryList ->
+           pieChartSetup(categoryList)
+           reviewsListSetup(categoryList)
+           dynamicTabsSetup(categoryList)
+       })
+
 
         return binding.root
 
     }
-
-    private fun dummylist(): List<Category> {
-        return listOf(
-            Category("Brunch", 460, ContextCompat.getColor(requireContext(), R.color.brunch)),
-            Category("Burgers", 61, ContextCompat.getColor(requireContext(), R.color.burgers)),
-            Category("Pizza", 46, ContextCompat.getColor(requireContext(), R.color.pizza)),
-            Category("Bangels", 28, ContextCompat.getColor(requireContext(), R.color.bangels)),
-            Category("Tacos", 19, ContextCompat.getColor(requireContext(), R.color.tacos)),
-            Category("Donuts", 17, ContextCompat.getColor(requireContext(), R.color.donuts)),
-            Category("Coffee", 13, ContextCompat.getColor(requireContext(), R.color.coffe)),
-            Category("Bar", 10, ContextCompat.getColor(requireContext(), R.color.bar))
-        )
-    }
-
 
     private fun reviewsListSetup(categoryList: List<Category>) {
         val categoryAdapter = CategoryAdapter(categoryList)
@@ -68,13 +62,13 @@ class CategoryFragment : Fragment() {
     private fun pieChartSetup(categoryList: List<Category>) {
 
         val sortedCategoryList = categoryList.sortedByDescending { it.totalReviws }
-        var sum = 0
+        var sum = ZERO
         val pieEntries = mutableListOf<PieEntry>()
         val colorList = mutableListOf<Int>()
 
         for (category in sortedCategoryList) {
             pieEntries.add(PieEntry(category.totalReviws.toFloat(), category.name))
-            colorList.add(category.color)
+            colorList.add(Color.parseColor(category.color))
             sum += category.totalReviws
         }
 
