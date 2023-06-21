@@ -18,6 +18,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.demo_instaforfood.Models.Place
 import com.example.demo_instaforfood.R
+import com.example.demo_instaforfood.Utils.Constants.HALF_EXPANDED
 import com.example.demo_instaforfood.databinding.FragmentMapBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -39,7 +40,7 @@ class MapFragment : Fragment() {
     private lateinit var context:Context
 
 
-    @SuppressLint("PotentialBehaviorOverride")
+
     private val callback = OnMapReadyCallback { googleMap ->
 
 
@@ -124,7 +125,7 @@ class MapFragment : Fragment() {
         bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
         bottomSheetBehavior.apply {
             isFitToContents = false
-            halfExpandedRatio = 0.6f
+            halfExpandedRatio = HALF_EXPANDED
         }
 
         binding.ivMinimize.setOnClickListener {
@@ -150,6 +151,7 @@ class MapFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+        
         mapFragment?.getMapAsync(callback)
     }
 

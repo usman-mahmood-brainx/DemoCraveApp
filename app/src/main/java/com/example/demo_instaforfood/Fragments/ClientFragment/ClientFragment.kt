@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.demo_instaforfood.CustomResponse
 import com.example.demo_instaforfood.SharedPreferencesHelper
 import com.example.demo_instaforfood.ViewModels.ClientsViewModel
 import com.example.demo_instaforfood.databinding.FragmentClientsBinding
@@ -53,10 +54,30 @@ class ClientFragment : Fragment() {
         }
 
         clientViewModel.clientList.observe(viewLifecycleOwner, Observer {
-            if (it != null) {
-                binding.pbClients.visibility = View.GONE
-                clientAdapter.setList(it)
+            when(it){
+                is CustomResponse.Loading -> {
+                    binding.pbClients.visibility = View.VISIBLE
+                    binding.rvClients.visibility = View.GONE
+                    binding.tvError.visibility = View.GONE
+                }
+                is CustomResponse.Success -> {
+                    binding.pbClients.visibility = View.GONE
+                    binding.rvClients.visibility = View.VISIBLE
+                    binding.tvError.visibility = View.GONE
+                    if(it.data != null){
+                        clientAdapter.setList(it.data)
+                    }
+
+                }
+                is CustomResponse.Error -> {
+                    binding.pbClients.visibility = View.GONE
+                    binding.rvClients.visibility = View.GONE
+                    binding.tvError.visibility = View.VISIBLE
+                    binding.tvError.text = it.errorMessage
+                }
+                else -> {}
             }
+           
         })
     }
 

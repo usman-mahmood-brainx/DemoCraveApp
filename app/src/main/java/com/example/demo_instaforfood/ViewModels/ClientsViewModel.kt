@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.demo_instaforfood.CustomResponse
 import com.example.demo_instaforfood.Models.Client
 import com.example.demo_instaforfood.Models.LoginRequest
 import com.example.demo_instaforfood.Models.LoginResponse
@@ -18,7 +19,7 @@ import javax.inject.Inject
 class ClientsViewModel @Inject constructor(private val repository: AppRepository) : ViewModel() {
 
 
-    val clientList:LiveData<List<Client>>
+    val clientList:LiveData<CustomResponse<List<Client>>>
         get() = repository.clientList
 
     fun getClientList(accessToken: String?, client: String?, uid: String?,name:String?) {

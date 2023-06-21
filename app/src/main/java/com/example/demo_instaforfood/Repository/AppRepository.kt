@@ -7,6 +7,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.liveData
 import com.example.demo_instaforfood.Api.ReviewImageApi
 import com.example.demo_instaforfood.Api.UserApi
+import com.example.demo_instaforfood.CustomResponse
 import com.example.demo_instaforfood.Models.Client
 import com.example.demo_instaforfood.Models.LoginRequest
 import com.example.demo_instaforfood.Models.LoginResponse
@@ -23,8 +24,8 @@ class AppRepository @Inject constructor(
 ) {
 
 
-    private val clientsLiveData = MutableLiveData<List<Client>>()
-    val clientList: LiveData<List<Client>>
+    private val clientsLiveData = MutableLiveData<CustomResponse<List<Client>>>()
+    val clientList: LiveData<CustomResponse<List<Client>>>
         get() = clientsLiveData
 
     fun getImages() = Pager(
@@ -41,8 +42,14 @@ class AppRepository @Inject constructor(
     }
 
     suspend fun getClientList(accessToken: String?, client: String?, uid: String?,name:String?) {
-        val response = userAPI.getClientsList(accessToken, client, uid,name)
-        clientsLiveData.value = response.body()
+      try{
+          val response = userAPI.getClientsList(accessToken, client, uid,name)
+          clientsLiveData.postValue(CustomResponse.Success(response.body()))
+      }
+      catch (e:Exception){
+          clientsLiveData.postValue(CustomResponse.Error(e.message.toString()))
+      }
+
     }
 
 }

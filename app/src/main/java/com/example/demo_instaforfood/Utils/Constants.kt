@@ -14,5 +14,8 @@ object Constants {
     const val KEY_FILE_URL = "file_url"
 
     const val ZERO = 0
+    const val FRAGMENT_COUNT  = 8
+
+    const val HALF_EXPANDED = 0.6f
 
 }

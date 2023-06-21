@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.demo_instaforfood.Models.FoodResult
 import com.example.demo_instaforfood.R
+import com.example.demo_instaforfood.Utils.Constants.FRAGMENT_COUNT
 
 class FoodResultAdapter(private var foodResultList: List<FoodResult>) : RecyclerView.Adapter<FoodResultAdapter.ViewHolder>() {
 
@@ -27,7 +28,7 @@ class FoodResultAdapter(private var foodResultList: List<FoodResult>) : Recycler
 
 
     override fun getItemCount(): Int {
-        return 8
+        return FRAGMENT_COUNT
     }
 
     class ViewHolder(FoodResultView: View) : RecyclerView.ViewHolder(FoodResultView) {

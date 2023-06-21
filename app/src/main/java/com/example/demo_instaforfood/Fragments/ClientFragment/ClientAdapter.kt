@@ -48,8 +48,5 @@ class ClientAdapter(private var clientList: List<Client>) : RecyclerView.Adapter
         val tvName: TextView = ClientView.findViewById(R.id.tvName)
         val tvPhoneNumber: TextView = ClientView.findViewById(R.id.tvPhoneNum)
         val tvNameFirstLetter:TextView = ClientView.findViewById(R.id.tvNameLetter)
-
-
-
     }
 }
